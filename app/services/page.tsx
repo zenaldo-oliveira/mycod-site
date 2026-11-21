@@ -2,7 +2,7 @@ import { ServicesContent } from "@/components/services/ServicesContent";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Soluções | ZTech Solutions — Sites, sistemas e automações",
+  title: "Soluções | MyCod — Sites, sistemas e automações",
   description:
     "Landing pages, catálogos digitais, CRM, automações, assistentes com IA, sistemas sob medida e ERP/SaaS: para quem serve, o que inclui e como contratar.",
   keywords: [

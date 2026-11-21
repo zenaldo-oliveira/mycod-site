@@ -7,7 +7,7 @@ import textToVoiceShot from "@/public/projects/screenshots/text-to-voice-ai.webp
 import cafeteriaShot from "@/public/projects/screenshots/cafeteria.webp";
 import turismoShot from "@/public/projects/screenshots/turismo.webp";
 
-// Fonte única dos projetos reais da ZTech (Home e /projects). Nomes,
+// Fonte única dos projetos reais da MyCod (Home e /projects). Nomes,
 // tecnologias e links não são traduzidos (nomes próprios / marcas reais).
 // Textos traduzidos (categoria, problema, solução, status) ficam em
 // t.projects.items — casados por ÍNDICE com esta lista: manter a mesma ordem.

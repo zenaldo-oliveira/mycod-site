@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { FloatingWhatsapp } from "@/components/layout/FloatingWhatsapp";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageBackground } from "@/components/layout/PageBackground";
@@ -29,11 +28,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "ZTech Solutions | Desenvolvimento de Software para Empresas",
+    default: "MyCod | Desenvolvimento de Software para Empresas",
     template: "%s",
   },
   description:
-    "A ZTech Solutions desenvolve sistemas web, SaaS, automações e soluções com inteligência artificial para empresas que querem ganhar produtividade, controle e escala.",
+    "A MyCod desenvolve sistemas web, SaaS, automações e soluções com inteligência artificial para empresas que querem ganhar produtividade, controle e escala.",
   alternates: {
     canonical: "/",
   },
@@ -41,8 +40,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: SITE_URL,
-    siteName: "ZTech Solutions",
-    title: "ZTech Solutions | Desenvolvimento de Software para Empresas",
+    siteName: "MyCod",
+    title: "MyCod | Desenvolvimento de Software para Empresas",
     description:
       "Sistemas web, SaaS, automações e soluções com inteligência artificial para empresas que querem ganhar produtividade, controle e escala.",
     // TODO: adicionar `images` com um asset OG de 1200x630 assim que ele existir
@@ -50,7 +49,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "ZTech Solutions | Desenvolvimento de Software para Empresas",
+    title: "MyCod | Desenvolvimento de Software para Empresas",
     description:
       "Sistemas web, SaaS, automações e soluções com inteligência artificial para empresas que querem ganhar produtividade, controle e escala.",
   },
@@ -75,9 +74,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <Script
-          id="ztech-preferences-init"
-          strategy="beforeInteractive"
+        {/* Script síncrono no <head>: roda antes do primeiro paint. O
+            beforeInteractive do next/script não garante essa ordem no App
+            Router. Conteúdo fixo e sem dado do usuário. */}
+        <script
+          id="mycod-preferences-init"
           dangerouslySetInnerHTML={{ __html: PREFERENCES_INIT_SCRIPT }}
         />
       </head>

@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { BASE, ROUTES, createCheck, finish, newContext } from "./support/helpers";
+import { BASE, ROUTES, createCheck, finish, newContext, skipIntro } from "./support/helpers";
 
 // Identidade visual: PageBackground em fallback CSS (sem vídeo), contraste
 // WCAG dos tokens nos dois temas, Top Bar transparente → vidro ao rolar e
@@ -13,10 +13,11 @@ for (const theme of ["dark", "light"] as const) {
     const page = await context.newPage();
     const media: string[] = [];
     page.on("request", (r) => {
-      if (/\.(mp4|webm)(\?|$)/.test(r.url())) media.push(r.url());
+      // A vinheta da MyCod é a única exceção: ela toca na primeira carga da home.
+      if (/\.(mp4|webm)(\?|$)/.test(r.url()) && !/\/brand\/MyCod-vinheta\.mp4/.test(r.url())) media.push(r.url());
     });
     await page.goto(BASE + "/", { waitUntil: "networkidle" });
-
+    await skipIntro(page);
     const fb = await page.evaluate(() => {
       const bg = document.querySelector("body > div[aria-hidden='true'].fixed")!;
       const base = bg.querySelector(".page-background__base");
@@ -69,14 +70,14 @@ for (const theme of ["dark", "light"] as const) {
         const fg = probe(token(tk));
         out[tk] = { background: contrast(fg, bg, bg), surface: contrast(fg, surface, bg), surfaceStrong: contrast(fg, strong, bg) };
       }
-      return { tokens: out, ctaText: contrast(probe(token("--background")), probe(token("--cta")), bg) };
+      return { tokens: out, ctaText: contrast(probe("#ffffff"), probe(token("--cta")), bg) };
     });
     const min = (o: { background: number; surface: number; surfaceStrong: number }) => Math.min(o.background, o.surface, o.surfaceStrong);
     check(`${theme}: texto principal ≥ 7:1`, min(c.tokens["--text-primary"]) >= 7, c.tokens["--text-primary"]);
     check(`${theme}: texto secundário ≥ 4.5:1`, min(c.tokens["--text-secondary"]) >= 4.5, c.tokens["--text-secondary"]);
     check(`${theme}: texto muted ≥ 4.5:1`, min(c.tokens["--text-muted"]) >= 4.5, c.tokens["--text-muted"]);
     check(`${theme}: accent ≥ 4.5:1`, min(c.tokens["--accent"]) >= 4.5, c.tokens["--accent"]);
-    // Ações: texto da cor de fundo do tema sobre o azul do CTA (texto escuro no tema dark).
+    // Ações: texto branco sobre o roxo do CTA (--cta), nos dois temas.
     check(`${theme}: texto sobre CTA ≥ 4.5:1`, c.ctaText >= 4.5, c.ctaText);
 
     // Top Bar: transparente no topo, vidro após rolar
@@ -114,6 +115,7 @@ test("mobile: brilhos do fundo reduzidos (390 e 360px)", async ({ browser }) => 
     const context = await newContext(browser, { viewport: { width, height: 800 } });
     const page = await context.newPage();
     await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await skipIntro(page);
     const op = await page.evaluate(() => getComputedStyle(document.querySelector(".page-background__base")!).opacity);
     check(`${width}px: brilhos do fundo reduzidos no mobile`, op === "0.7", op);
     await page.screenshot({ path: test.info().outputPath(`dark-home-${width}.png`) });

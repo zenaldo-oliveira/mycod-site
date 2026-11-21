@@ -1,7 +1,7 @@
 import { test } from "@playwright/test";
 import type { Browser, Page } from "@playwright/test";
 import { HOME_ENTRIES, HOME_PREVIEWS } from "../lib/catalog/home";
-import { BASE, WA_EXISTING_SITE, WA_OFFICIAL, createCheck, finish, headingText, newContext, newPage, scrollThrough } from "./support/helpers";
+import { BASE, WA_EXISTING_SITE, WA_OFFICIAL, createCheck, finish, headingText, newContext, newPage, scrollThrough, skipIntro } from "./support/helpers";
 
 // Home comercial (fluxo de venda): abertura com demonstração → serviços
 // (problema e exemplo) → projetos reais → como funciona → dúvidas → orçamento.
@@ -20,6 +20,7 @@ const DEMO_SITUATIONS = [
 async function openHome(browser: Browser, width: number, opts: { reducedMotion?: "reduce"; height?: number } = {}) {
   const opened = await newPage(browser, width, { height: opts.height ?? 900, reducedMotion: opts.reducedMotion });
   await opened.page.goto(BASE + "/", { waitUntil: "networkidle" });
+  await skipIntro(opened.page);
   return opened;
 }
 
@@ -39,7 +40,7 @@ for (const width of [1440, 1024, 768, 390, 360]) {
     check(`${width}px H1 aprovado no Hero`, heroTitle.startsWith(HERO_TITLE), heroTitle);
 
     const layout = await page.evaluate(() => {
-      const button = document.querySelector<HTMLAnchorElement>('#inicio a[href="#contato"]')!.getBoundingClientRect();
+      const button = document.querySelector<HTMLAnchorElement>('#inicio a[href^="https://wa.me/"]')!.getBoundingClientRect();
       const figure = document.querySelector("#inicio figure")!.getBoundingClientRect();
       return {
         buttonTop: Math.round(button.top),
@@ -159,22 +160,28 @@ test("Home: serviços com problema e exemplo, projetos, processo, dúvidas e or�
   finish(check);
 });
 
-test("Home: CTA principal do Hero leva ao orçamento da home; configurador é secundário", async ({ browser }) => {
+test("Home: CTA principal do Hero abre o WhatsApp de orçamento; configurador é secundário", async ({ browser }) => {
   const check = createCheck();
   const { context, page } = await openHome(browser, 1440);
 
-  const heroLinks = await page.evaluate(() => [...document.querySelectorAll<HTMLAnchorElement>("#inicio a")].map((a) => [a.textContent?.trim(), a.getAttribute("href")]));
-  check("Hero: links são o orçamento (#contato) e o configurador (/build)", JSON.stringify(heroLinks) === JSON.stringify([["Solicitar orçamento", "#contato"], ["Montar projeto no configurador", "/build"]]), heroLinks);
+  const heroLinks = await page.evaluate(() =>
+    [...document.querySelectorAll<HTMLAnchorElement>("#inicio a")].map((a) => ({
+      text: a.textContent?.trim(),
+      href: a.getAttribute("href"),
+      target: a.getAttribute("target"),
+    })),
+  );
+  const primary = heroLinks[0];
+  const secondary = heroLinks[1];
+  check("Hero: CTA principal é 'Pedir orçamento pelo WhatsApp'", primary?.text === "Pedir orçamento pelo WhatsApp", primary);
+  check(
+    "Hero: CTA principal aponta ao WhatsApp oficial, em nova aba",
+    !!primary?.href?.startsWith("https://wa.me/5565974009820") && primary?.target === "_blank",
+    primary,
+  );
+  check("Hero: configurador (/build) é a opção secundária", secondary?.href === "/build", secondary);
 
-  // O clique deve levar ao bloco de orçamento, visível na tela.
-  await page.locator('#inicio a[href="#contato"]').click();
-  await page.waitForTimeout(900);
-  const inView = await page.evaluate(() => {
-    const r = document.getElementById("contato")!.getBoundingClientRect();
-    return r.top < innerHeight && r.bottom > 0;
-  });
-  check("Hero: clique em Solicitar orçamento mostra o bloco #contato", inView, inView);
-
+  // Não clicamos: o link abriria o WhatsApp em nova aba. Conferimos o destino.
   await context.close();
   finish(check);
 });
@@ -199,6 +206,7 @@ test("Home: sem JavaScript, o Hero e a demonstração continuam no HTML", async 
   const context = await newContext(browser, { viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto(BASE + "/", { waitUntil: "load" });
+  await skipIntro(page);
   const h1 = await headingText(page);
   check("sem JS: H1 aprovado no HTML", h1.startsWith(HERO_TITLE), h1);
   const figure = await page.evaluate(() => document.querySelectorAll("#inicio figure [role='tab']").length);

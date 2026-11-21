@@ -1,4 +1,4 @@
-// Catálogo comercial da ZTech: soluções, planos, adicionais e custos
+// Catálogo comercial da MyCod: soluções, planos, adicionais e custos
 // externos. Fonte única para /services, /plans, /build e Home — os textos
 // (nomes, descrições, entregas) ficam em t.commercial, casados pelos ids
 // abaixo; aqui fica só a estrutura e os valores.
@@ -160,7 +160,7 @@ export const ADDONS: readonly AddonDef[] = [
   { id: "extra-hours", pricing: { setup: null, monthly: null } },
 ];
 
-// Custos de terceiros: nunca entram nos valores da ZTech exibidos no site.
+// Custos de terceiros: nunca entram nos valores da MyCod exibidos no site.
 export const EXTERNAL_COSTS: readonly ExternalCostId[] = ["domain", "email", "ai-usage", "whatsapp-api", "third-party"];
 
 export function getSolution(id: string): SolutionDef | undefined {

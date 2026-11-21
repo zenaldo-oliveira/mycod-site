@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { MycodMark } from "@/components/brand/MycodMark";
 import { SITE_NAME } from "@/lib/site";
 
 type LogoProps = {
@@ -7,19 +7,13 @@ type LogoProps = {
   // Classes do nome em texto (ex.: esconder na Sidebar recolhida).
   nameClassName?: string;
   onClick?: () => void;
-  // Só o logo acima da dobra deve carregar com prioridade.
+  // Mantido por compatibilidade com quem usa o Logo; o M é SVG, sem carregamento.
   priority?: boolean;
 };
 
-// Símbolo "Z" (public/brand/ztech-mark.png, recortado do logo oficial) +
-// nome da empresa em texto — o logo completo tem textos ilegíveis em
-// tamanhos pequenos.
-export function Logo({
-  className = "",
-  nameClassName = "",
-  onClick,
-  priority = false,
-}: LogoProps) {
+// Monograma "M" em um quadrado roxo + nome da marca em texto. O nome em texto
+// fica legível em tamanhos pequenos, onde o desenho completo se perderia.
+export function Logo({ className = "", nameClassName = "", onClick }: LogoProps) {
   return (
     <Link
       href="/"
@@ -27,14 +21,12 @@ export function Logo({
       aria-label={SITE_NAME}
       className={`inline-flex min-w-0 items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${className}`}
     >
-      <Image
-        src="/brand/ztech-mark.png"
-        alt=""
-        width={28}
-        height={28}
-        priority={priority}
-        className="h-7 w-7 shrink-0 rounded-md"
-      />
+      <span
+        aria-hidden="true"
+        className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[var(--brand-purple)] text-white"
+      >
+        <MycodMark className="h-4 w-auto" />
+      </span>
       <span
         className={`truncate text-[15px] font-semibold tracking-tight text-text-primary ${nameClassName}`}
       >

@@ -185,7 +185,7 @@ export const commercialEs: CommercialCopy = {
     detailsEyebrow: "Detalles",
     detailsTitle: "Todas las soluciones en detalle",
     viewSite: "Ver sitio",
-    showcaseLabel: "Capturas de sitios desarrollados por ZTech",
+    showcaseLabel: "Capturas de sitios desarrollados por MyCod",
   },
 
   plansPage: {
@@ -265,7 +265,7 @@ export const commercialEs: CommercialCopy = {
     addonsTitle: "Adicionales",
     addonsDescription: "Ítems que pueden incluirse en cualquier plan compatible.",
     externalTitle: "Costos externos",
-    externalDescription: "Servicios de terceros que algunos proyectos usan. Se informan por separado en la propuesta y no forman parte de los valores de ZTech.",
+    externalDescription: "Servicios de terceros que algunos proyectos usan. Se informan por separado en la propuesta y no forman parte de los valores de MyCod.",
     paymentNote: "El sitio no procesa pagos. La forma y las condiciones de pago se acuerdan en la propuesta.",
   },
 
@@ -307,14 +307,14 @@ export const commercialEs: CommercialCopy = {
     summaryDetails: "Detalles",
     summaryContact: "Contacto",
     summaryTotal: "Estimación",
-    totalOnRequest: "Valores a consultar. ZTech envía la propuesta después de analizar la solicitud.",
+    totalOnRequest: "Valores a consultar. MyCod envía la propuesta después de analizar la solicitud.",
     scopeNote: "Esta solución requiere diagnóstico y definición de alcance antes de cualquier valor.",
     noPaymentNote: "No se cobra nada ahora. El envío abre una conversación de WhatsApp con el resumen de abajo.",
     send: "Enviar por WhatsApp",
     sendHint: "Abre WhatsApp en una nueva pestaña con el mensaje listo.",
     edit: "Editar",
     message: {
-      title: "Nueva solicitud de proyecto — sitio ZTech",
+      title: "Nueva solicitud de proyecto — sitio MyCod",
       solution: "Solución",
       needs: "Necesidades",
       addons: "Adicionales",
@@ -356,7 +356,7 @@ export const commercialEs: CommercialCopy = {
       { question: "¿Dónde se aloja el sitio o sistema?", answer: "El alojamiento se define en la propuesta, según el tipo de solución y el volumen de accesos." },
       { question: "¿Puedo pedir cambios después de publicado?", answer: "Sí. Cómo se solicitan y cobran los cambios se define en la propuesta." },
       { question: "¿Cómo funciona el consumo de IA?", answer: "Las soluciones con IA usan modelos de proveedores externos, cobrados según el volumen de uso. Estimamos ese costo en el diagnóstico y aparece por separado en la propuesta." },
-      { question: "¿Qué servicios externos pueden tener costo?", answer: "Dominio, correo profesional, consumo de IA, proveedores de API de WhatsApp y herramientas de terceros. No forman parte de los valores de ZTech y se informan en la propuesta." },
+      { question: "¿Qué servicios externos pueden tener costo?", answer: "Dominio, correo profesional, consumo de IA, proveedores de API de WhatsApp y herramientas de terceros. No forman parte de los valores de MyCod y se informan en la propuesta." },
       { question: "¿Hay permanencia mínima o multa por cancelación?", answer: "Las condiciones de contratación y cancelación se definen en la propuesta comercial, antes de cualquier firma." },
       { question: "¿Cómo se paga?", answer: "El sitio no procesa pagos. La forma y las condiciones se acuerdan en la propuesta." },
     ],
@@ -375,7 +375,7 @@ export const commercialEs: CommercialCopy = {
     requestProposal: "Solicitar propuesta",
     primeHowTitle: "Cómo funciona Prime",
     primeHow:
-      "La barbería contrata el sistema de ZTech. Los clientes de la barbería se suscriben a los planes de corte de la propia barbería. Las comisiones del medio de pago son costos externos, informados en la propuesta.",
+      "La barbería contrata el sistema de MyCod. Los clientes de la barbería se suscriben a los planes de corte de la propia barbería. Las comisiones del medio de pago son costos externos, informados en la propuesta.",
     resources: {
       services: "Lista de servicios",
       prices: "Tabla de precios",
@@ -396,7 +396,7 @@ export const commercialEs: CommercialCopy = {
         title: "Tu barbería en internet",
         benefit: "Landing page con servicios, precios, galería, ubicación y botón de WhatsApp.",
         cta: "Quiero presentar mi barbería",
-        imageAlt: "Página de inicio de Barber Shop Premium, sitio de barbería desarrollado por ZTech",
+        imageAlt: "Página de inicio de Barber Shop Premium, sitio de barbería desarrollado por MyCod",
       },
       agenda: {
         name: "Agenda",
@@ -427,7 +427,7 @@ export const commercialEs: CommercialCopy = {
 
   showcase: {
     eyebrow: "Servicios",
-    title: "Lo que ZTech entrega para tu empresa",
+    title: "Lo que MyCod entrega para tu empresa",
     description: "Elige el servicio y arma la solicitud en pocos minutos. Los disponibles tienen alcance estándar; los a medida empiezan con un diagnóstico.",
     receivesLabel: "Lo que recibes",
     requestProposal: "Solicitar propuesta",
@@ -441,13 +441,13 @@ export const commercialEs: CommercialCopy = {
         name: "Landing pages",
         benefit: "Una página directa para presentar tu oferta y recibir contactos por WhatsApp.",
         cta: "Quiero mi landing page",
-        imageAlt: "Página de Pet Shop Premium, landing page desarrollada por ZTech",
+        imageAlt: "Página de Pet Shop Premium, landing page desarrollada por MyCod",
       },
       "business-site": {
         name: "Sitios empresariales",
         benefit: "Un sitio con una página para cada servicio, para que la empresa sea encontrada y genere confianza.",
         cta: "Quiero mi sitio",
-        imageAlt: "Página de inicio de Barber Shop Premium, sitio desarrollado por ZTech",
+        imageAlt: "Página de inicio de Barber Shop Premium, sitio desarrollado por MyCod",
       },
       booking: {
         name: "Reservas online",
@@ -477,13 +477,13 @@ export const commercialEs: CommercialCopy = {
         name: "Sistemas a medida y SaaS",
         benefit: "Software hecho para tu proceso o para convertirse en un producto vendido por suscripción.",
         cta: "Quiero un sistema a medida",
-        imageAlt: "Pantallas de la aplicación Dieta IA, desarrollada por ZTech",
+        imageAlt: "Pantallas de la aplicación Dieta IA, desarrollada por MyCod",
       },
       "automation-ai": {
         name: "Automatización e inteligencia artificial",
         benefit: "Menos tareas manuales: datos que pasan de un lugar a otro y atención con apoyo de IA.",
         cta: "Quiero automatizar procesos",
-        imageAlt: "Pantalla de Text To Voice AI, herramienta web desarrollada por ZTech",
+        imageAlt: "Pantalla de Text To Voice AI, herramienta web desarrollada por MyCod",
       },
     },
     resources: {
@@ -515,8 +515,8 @@ export const commercialEs: CommercialCopy = {
   },
 
   home: {
-    demoLabel: "Demostración de un proyecto real de ZTech",
-    demoCaption: "Proyectos reales desarrollados por ZTech",
+    demoLabel: "Demostración de un proyecto real de MyCod",
+    demoCaption: "Proyectos reales desarrollados por MyCod",
     demoPlay: "Reproducir demostración",
     demoPause: "Pausar demostración",
     offers: {
@@ -564,7 +564,7 @@ export const commercialEs: CommercialCopy = {
         },
         referenceLabel: "Referencia real",
         reference:
-          "ZLift Manager es el sistema propio de ZTech para empresas de mantenimiento de ascensores. Reúne clientes, equipos, técnicos y órdenes de servicio, con checklist, fotos, firma e informe.",
+          "ZLift Manager es el sistema propio de MyCod para empresas de mantenimiento de ascensores. Reúne clientes, equipos, técnicos y órdenes de servicio, con checklist, fotos, firma e informe.",
         referenceLink: "Ver ZLift Manager",
       },
       barber: {
@@ -587,7 +587,7 @@ export const commercialEs: CommercialCopy = {
           problem: "Quien llega desde Google o un anuncio no encuentra rápido lo que necesita y se va antes de llamar.",
           example: "Ej.: un taller con una página solo para la revisión de aire acondicionado y un botón directo a WhatsApp.",
           cta: "Quiero una landing page",
-          imageAlt: "Página de Pet Shop Premium, landing page desarrollada por ZTech",
+          imageAlt: "Página de Pet Shop Premium, landing page desarrollada por MyCod",
         },
         site: {
           name: "Sitios empresariales",
@@ -595,7 +595,7 @@ export const commercialEs: CommercialCopy = {
           problem: "Sin un sitio que explique cada servicio, el cliente pide presupuesto sin saber qué hace la empresa.",
           example: "Ej.: una clínica con una página por especialidad, la dirección en el mapa y un formulario de contacto.",
           cta: "Quiero un sitio empresarial",
-          imageAlt: "Página de inicio de Barber Shop Premium, sitio desarrollado por ZTech",
+          imageAlt: "Página de inicio de Barber Shop Premium, sitio desarrollado por MyCod",
         },
         systems: {
           name: "Sistemas web y automatizaciones",
@@ -603,14 +603,14 @@ export const commercialEs: CommercialCopy = {
           problem: "Los pedidos llegan sueltos por WhatsApp y el equipo pierde el control de lo ya atendido.",
           example: "Ej.: un panel donde cada pedido pasa de Nuevo a Completado, con cliente y servicio registrados.",
           cta: "Quiero un sistema o automatización",
-          imageAlt: "Pantallas de la aplicación Dieta IA, desarrollada por ZTech",
+          imageAlt: "Pantallas de la aplicación Dieta IA, desarrollada por MyCod",
         },
       },
     },
     previews: {
       eyebrow: "Ejemplos",
       title: "Mira el tipo de trabajo antes de pedir.",
-      description: "Capturas de proyectos publicados por ZTech y un prototipo de sistema, identificado como ilustración. Alterna entre los ejemplos.",
+      description: "Capturas de proyectos publicados por MyCod y un prototipo de sistema, identificado como ilustración. Alterna entre los ejemplos.",
       tablistLabel: "Ejemplos de proyectos",
       realProject: "Proyecto real",
       prototypeLabel: "Imagen ilustrativa · prototipo",
@@ -623,7 +623,7 @@ export const commercialEs: CommercialCopy = {
     receives: {
       eyebrow: "Qué recibes",
       title: "Compara lo que incluye cada entrada.",
-      description: "Funcionalidades del catálogo de ZTech. Las marcadas como a medida entran en la propuesta después del diagnóstico.",
+      description: "Funcionalidades del catálogo de MyCod. Las marcadas como a medida entran en la propuesta después del diagnóstico.",
       tableCaption: "Funcionalidades incluidas en cada entrada",
       featureLabel: "Funcionalidad",
       included: "Incluido",
@@ -643,9 +643,9 @@ export const commercialEs: CommercialCopy = {
       existing: {
         title: "Ya tengo un sitio",
         description: "Pide un análisis de tu sitio actual: envía la dirección y cuéntanos qué quieres mejorar, como diseño, páginas, contacto por WhatsApp o integraciones.",
-        note: "El análisis lo hace el equipo de ZTech, no una herramienta automática.",
+        note: "El análisis lo hace el equipo de MyCod, no una herramienta automática.",
         cta: "Solicitar análisis de mi sitio",
-        message: "¡Hola! Ya tengo un sitio y me gustaría solicitar un análisis de ZTech. Dirección del sitio:",
+        message: "¡Hola! Ya tengo un sitio y me gustaría solicitar un análisis de MyCod. Dirección del sitio:",
         opened: "WhatsApp se abrió en una nueva pestaña. Completa el mensaje con la dirección de tu sitio.",
       },
       formLink: "¿Prefieres formulario? Enviar mensaje",

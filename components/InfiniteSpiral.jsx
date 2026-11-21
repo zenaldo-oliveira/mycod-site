@@ -11,7 +11,7 @@ const smoothstep = (min, max, value) => {
 };
 
 const InfiniteSpiral = ({
-  // ZTech: tipo explícito para quem usa em TypeScript (sem ele, [] vira never[]).
+  // MyCod: tipo explícito para quem usa em TypeScript (sem ele, [] vira never[]).
   items = /** @type {Array<string | { src: string, alt?: string, id?: string, href?: string, target?: string, label?: string }>} */ ([]),
   speed = 0.55,
   direction = 'up',
@@ -32,12 +32,12 @@ const InfiniteSpiral = ({
   imageFit = 'cover',
   grayscale = 0,
   className = '',
-  // ZTech: pausa controlada de fora (botão Pausar/Reproduzir) — os cards
+  // MyCod: pausa controlada de fora (botão Pausar/Reproduzir) — os cards
   // ficam parados na posição atual.
   paused = false,
-  // ZTech: rótulo acessível da galeria (traduzido por quem usa).
+  // MyCod: rótulo acessível da galeria (traduzido por quem usa).
   label = 'Infinite spiral gallery',
-  // ZTech: quantas larguras de card cabem na área antes de reduzir a escala
+  // MyCod: quantas larguras de card cabem na área antes de reduzir a escala
   // (o padrão 2.8 é o comportamento original). Quem já calcula o tamanho
   // dos cards para a área passa um valor menor para usar o tamanho real.
   fitWidthRatio = 2.8
@@ -78,7 +78,7 @@ const InfiniteSpiral = ({
     const scrollSpeedMultiplier = Math.max(speed, 0) / 0.55;
     let lastScrollY = window.scrollY;
 
-    // ZTech: o laço só roda enquanto há movimento. Fora da tela, com a aba
+    // MyCod: o laço só roda enquanto há movimento. Fora da tela, com a aba
     // oculta, pausado ou com movimento reduzido, ele desacelera, desenha a
     // posição final e para; qualquer pedido de movimento o retoma, sem salto
     // de tempo (previousTime recomeça no reinício).
@@ -189,7 +189,7 @@ const InfiniteSpiral = ({
         card.style.pointerEvents = opacity > 0.25 ? 'auto' : 'none';
       });
 
-      // ZTech: continua enquanto houver velocidade, arraste ou distância até
+      // MyCod: continua enquanto houver velocidade, arraste ou distância até
       // o alvo; parado, não agenda novo quadro.
       const settled =
         desiredAutoSpeed === 0 &&
@@ -230,7 +230,7 @@ const InfiniteSpiral = ({
     fitWidthRatio
   ]);
 
-  // ZTech: pausar congela os cards na posição atual (sem desaceleração);
+  // MyCod: pausar congela os cards na posição atual (sem desaceleração);
   // retomar reinicia o laço a partir dela.
   useEffect(() => {
     pausedRef.current = paused;

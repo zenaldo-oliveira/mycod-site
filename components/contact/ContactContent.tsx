@@ -1,9 +1,10 @@
 "use client";
 
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Clock, MessageCircle } from "lucide-react";
+import { Clock, Mail, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { WhatsAppCta } from "@/components/contact/WhatsAppCta";
+import { CONTACT_EMAIL } from "@/lib/contact/email";
 import { AnimatedH1 } from "@/components/ui/AnimatedH1";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -66,11 +67,15 @@ export function ContactContent() {
                       <FaGithub size={14} aria-hidden="true" />
                       GitHub
                     </a>
+                    <a href={`mailto:${CONTACT_EMAIL}`} className={CHANNEL_LINK_CLASS}>
+                      <Mail size={14} strokeWidth={1.75} aria-hidden="true" />
+                      {CONTACT_EMAIL}
+                    </a>
                   </div>
                 </div>
               </div>
 
-              {/* O que acontece depois do contato: o processo real da ZTech. */}
+              {/* O que acontece depois do contato: o processo real da MyCod. */}
               <div className="rounded-2xl border border-border bg-surface/70 p-6 sm:p-8">
                 <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{t.home.howWeWork.title}</p>
                 <ol className="mt-4 space-y-3.5">

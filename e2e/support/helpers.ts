@@ -25,12 +25,12 @@ export const PROJECT_TITLES = [
 
 // Mensagem oficial do WhatsApp (lib/contact/whatsapp.ts).
 export const WA_MESSAGE =
-  "Olá! Conheci a ZTech pelo site e gostaria de conversar sobre um projeto para minha empresa.";
-export const WA_OFFICIAL = new URL(`https://wa.me/5565992832422?text=${encodeURIComponent(WA_MESSAGE)}`).href;
+  "Olá! Conheci a MyCod pelo site e gostaria de conversar sobre um projeto para minha empresa.";
+export const WA_OFFICIAL = new URL(`https://wa.me/5565974009820?text=${encodeURIComponent(WA_MESSAGE)}`).href;
 
 // Home, caminho "Já tenho um site": mensagem contextual própria.
 export const WA_EXISTING_SITE = new URL(
-  `https://wa.me/5565992832422?text=${encodeURIComponent("Olá! Já tenho um site e gostaria de solicitar uma análise da ZTech. Endereço do site:")}`,
+  `https://wa.me/5565974009820?text=${encodeURIComponent("Olá! Já tenho um site e gostaria de solicitar uma análise da MyCod. Endereço do site:")}`,
 ).href;
 
 export type Check = ((name: string, ok: unknown, detail?: unknown) => void) & {
@@ -109,3 +109,15 @@ export const headingText = (page: Page, selector = "h1") =>
     copy.querySelectorAll('[aria-hidden="true"]').forEach((node) => node.remove());
     return (copy.textContent ?? "").replace(/\s+/g, " ").trim();
   });
+
+// Pula a abertura MyCod pela interface quando ela aparece após carregar a home.
+// Os testes gerais da home usam isto; a suíte intro.spec.ts valida a vinheta.
+export async function skipIntro(page: Page) {
+  const intro = page.locator('section[aria-label="Abertura da MyCod"]');
+  if (await intro.isVisible()) {
+    // Esc é o atalho de "Pular abertura" e não move o ponteiro, para que
+    // os testes de interação com o mouse continuem começando do zero.
+    await page.keyboard.press("Escape");
+    await intro.waitFor({ state: "detached", timeout: 5_000 });
+  }
+}

@@ -1,10 +1,14 @@
 
-// Domínio oficial do site. A Vercel redireciona o domínio sem "www" para esta
-// URL (308), então canonical, Open Graph, sitemap e robots devem usar sempre
-// esta forma — nunca uma URL que responde com redirecionamento.
-export const SITE_URL = "https://www.zenaldodev.com.br";
+// Domínio oficial da MyCod. Definido em build por NEXT_PUBLIC_SITE_URL (ex.:
+// no painel da Vercel, por ambiente). Sem a variável, usa o domínio final
+// planejado. Canonical, Open Graph, sitemap e robots usam esta URL: ela deve
+// ser a que responde direto, sem redirecionamento. Em prévia, aponte para a
+// URL da prévia. Não use segredo nessa variável (ela vai para o navegador).
+const DEFAULT_SITE_URL = "https://mycod.com.br";
 
-export const SITE_NAME = "ZTech Solutions";
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
+
+export const SITE_NAME = "MyCod";
 
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/zenaldo-pereira-oliveira/",

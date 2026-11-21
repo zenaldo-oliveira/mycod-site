@@ -7,14 +7,14 @@ type WhatsAppCtaProps = {
   // Mensagem pré-preenchida; sem ela, usa a mensagem padrão do site.
   message?: string;
   ariaLabel?: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "inverse" | "secondary";
   size?: "sm" | "md";
   showArrow?: boolean;
   className?: string;
   onClick?: () => void;
 };
 
-// CTA principal do site: abre o WhatsApp da ZTech em nova aba.
+// CTA principal do site: abre o WhatsApp da MyCod em nova aba.
 export function WhatsAppCta({
   label,
   message,

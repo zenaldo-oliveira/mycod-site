@@ -1,6 +1,7 @@
 "use client";
 
 import { EntriesSection } from "@/components/home/sections/EntriesSection";
+import { MycodIntro } from "@/components/home/MycodIntro";
 import { HeroSection } from "@/components/home/sections/HeroSection";
 import { PathsSection } from "@/components/home/sections/PathsSection";
 import { PreviewsSection } from "@/components/home/sections/PreviewsSection";
@@ -17,6 +18,7 @@ export function HomeContent() {
 
   return (
     <>
+      <MycodIntro />
       <HeroSection />
       <EntriesSection />
       <PreviewsSection />

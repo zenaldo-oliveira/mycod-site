@@ -4,7 +4,7 @@ import type { Dictionary } from "@/lib/i18n/types";
 export const en: Dictionary = {
   nav: {
     home: "Home",
-    about: "About ZTech",
+    about: "About MyCod",
     services: "Websites and systems",
     plans: "Plans and pricing",
     build: "Build my project",
@@ -47,8 +47,8 @@ export const en: Dictionary = {
     rights: "All rights reserved.",
   },
   cta: {
-    talk: "Talk to ZTech",
-    whatsappAriaLabel: "Talk to ZTech on WhatsApp (opens in a new tab)",
+    talk: "Talk to MyCod",
+    whatsappAriaLabel: "Talk to MyCod on WhatsApp (opens in a new tab)",
     whatsappHint: "on WhatsApp (opens in a new tab)",
   },
   globalControls: {
@@ -99,7 +99,7 @@ export const en: Dictionary = {
           question: "Do you clean air conditioners? How much does it cost?",
           answer: "We do! How many units? I'll record your request and the team will confirm the price.",
           tag: "Request recorded in the dashboard",
-          botName: "ZTech automation",
+          botName: "MyCod automation",
         },
       },
       services: [
@@ -108,8 +108,8 @@ export const en: Dictionary = {
         { name: "AI automations", benefit: "Replies and requests organized without manual work." },
       ],
       chat: {
-        header: "ZTech Solutions",
-        outgoing: "Hi! I came from the ZTech Solutions website and would like to request a quote for my business. Can you help me?",
+        header: "MyCod",
+        outgoing: "Hi! I came from the MyCod website and would like to request a quote for my business. Can you help me?",
         outgoingMeta: "prefilled message",
         reply: "Hi! Thanks for getting in touch. Tell me which service you need.",
       },
@@ -175,16 +175,16 @@ export const en: Dictionary = {
       subtitle: "Let's turn your idea into software.",
       description:
         "Tell us how your company works today. We'll understand the problem and assess how technology can transform that process.",
-      cta: "Talk to ZTech",
+      cta: "Talk to MyCod",
       secondary: "Prefer a form? Send a message",
     },
   },
   about: {
-    eyebrow: "About ZTech Solutions",
+    eyebrow: "About MyCod",
     title: "Technology that turns real problems into digital solutions.",
     description:
-      "ZTech Solutions builds web systems, SaaS, apps, automations and artificial intelligence solutions for businesses that want to digitize processes and gain more control over their operations.",
-    cta: "Talk to ZTech",
+      "MyCod builds web systems, SaaS, apps, automations and artificial intelligence solutions for businesses that want to digitize processes and gain more control over their operations.",
+    cta: "Talk to MyCod",
     secondaryCta: "Explore cases",
     capabilitiesTitle: "What we build",
     proof: {
@@ -195,10 +195,10 @@ export const en: Dictionary = {
     },
     founder: {
       eyebrow: "Founder",
-      title: "Who's behind ZTech",
-      role: "Founder of ZTech Solutions",
+      title: "Who's behind MyCod",
+      role: "Founder of MyCod",
       body: [
-        "ZTech Solutions was founded by Zenaldo Oliveira, a full stack developer with a degree in Systems Analysis and Development, building modern applications with React, Next.js, TypeScript, Prisma and PostgreSQL.",
+        "MyCod was founded by Zenaldo Pereira de Oliveira, a full stack developer with a degree in Systems Analysis and Development, building modern applications with React, Next.js, TypeScript, Prisma and PostgreSQL.",
         "Beyond development, he has a technical background in Electrotechnics and knowledge of Digital Investigation (OSINT) — a combination that strengthens the problem-solving and analytical thinking behind every solution delivered.",
       ],
       formationTitle: "Education",
@@ -225,7 +225,7 @@ export const en: Dictionary = {
     },
     finalCta: {
       title: "Got a process that could be better?",
-      subtitle: "Tell ZTech what your business needs.",
+      subtitle: "Tell MyCod what your business needs.",
     },
   },
   projects: {
@@ -319,8 +319,8 @@ export const en: Dictionary = {
   contact: {
     eyebrow: "Contact",
     title: "Let's talk about your project.",
-    channelsTitle: "Talk directly to ZTech",
-    whatsappCta: "Talk to ZTech",
+    channelsTitle: "Talk directly to MyCod",
+    whatsappCta: "Talk to MyCod",
     responseLabel: "Response time",
     responseValue: "Within 24h",
     otherChannels: "Other channels",

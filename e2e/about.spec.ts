@@ -52,7 +52,7 @@ for (const width of [1440, 1280, 1024, 768, 390, 360]) {
     });
     check(
       `${width}px foto do fundador 4:5, dentro da tela, com legenda`,
-      photo.alt === "Zenaldo Oliveira" && photo.ratio === 0.8 && photo.left >= 0 && photo.right <= photo.vw && photo.caption.includes("Fundador"),
+      photo.alt === "Zenaldo Pereira de Oliveira" && photo.ratio === 0.8 && photo.left >= 0 && photo.right <= photo.vw && photo.caption.includes("Fundador"),
       photo,
     );
 
@@ -108,7 +108,7 @@ test("/about: conteúdo, prova visual, links e CTA final", async ({ browser }) =
   );
   check("único link externo além do WhatsApp é o LinkedIn real", external.length === 1 && external[0].includes("linkedin.com/in/zenaldo-pereira-oliveira"), external);
   const finalCta = await page.evaluate(() => document.getElementById("contato")?.innerText ?? "");
-  check("CTA final com o texto pedido", finalCta.includes("Tem um processo que pode ser melhor?") && finalCta.includes("Conte para a ZTech o que sua empresa precisa."));
+  check("CTA final com o texto pedido", finalCta.includes("Tem um processo que pode ser melhor?") && finalCta.includes("Conte para a MyCod o que sua empresa precisa."));
 
   // Foto estática: sem animação contínua
   const t1 = await page.evaluate(() => getComputedStyle(document.querySelector("#fundador figure")!).transform);
@@ -127,8 +127,8 @@ test("/about: conteúdo, prova visual, links e CTA final", async ({ browser }) =
 test("/about: idiomas EN/ES, tema claro e reduced motion", async ({ browser }) => {
   const check = createCheck();
   const langs: ["en" | "es", string, string][] = [
-    ["en", "Technology that turns real problems", "Who's behind ZTech"],
-    ["es", "Tecnología para transformar problemas reales", "Quién está detrás de ZTech"],
+    ["en", "Technology that turns real problems", "Who's behind MyCod"],
+    ["es", "Tecnología para transformar problemas reales", "Quién está detrás de MyCod"],
   ];
   for (const [lang, h1, founder] of langs) {
     const { context, page, errors } = await openAbout(browser, 1440, { lang });

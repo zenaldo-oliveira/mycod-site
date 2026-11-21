@@ -1,6 +1,7 @@
 import { test } from "@playwright/test";
 import type { Browser, Page } from "@playwright/test";
 import { BASE, PROJECT_TITLES, WA_EXISTING_SITE, WA_OFFICIAL, createCheck, finish, newContext, scrollThrough } from "./support/helpers";
+import { SITE_URL } from "../lib/site";
 
 // Todas as rotas: SEO (H1 estático, metadata), overflow, texto invisível,
 // WhatsApp oficial, índice de /services, filtros de /projects, formulário de
@@ -40,7 +41,7 @@ test("SEO: H1 único e estático no HTML do servidor + metadata", async ({ brows
     const canonical = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1] ?? "";
     check(
       `${route}: title/description/canonical sem tom pessoal`,
-      title.includes("ZTech") && desc.length > 40 && canonical.startsWith("https://www.zenaldodev.com.br") && !/freela|Desenvolvedor Full Stack/i.test(title + desc),
+      title.includes("MyCod") && desc.length > 40 && canonical.startsWith(SITE_URL) && !/freela|Desenvolvedor Full Stack/i.test(title + desc),
       { title, canonical },
     );
   }
@@ -203,7 +204,7 @@ test("/contact: formulário (API de leads simulada) — sucesso e erro", async (
       const err = await page.evaluate(() => document.querySelector("form")?.innerText ?? "");
       check("/contact: formulário (erro) mostra mensagem de erro", err.includes("Não foi possível registrar"), err.slice(0, 80));
       const fallback = await page.evaluate(() => {
-        const link = document.querySelector<HTMLAnchorElement>('form [role="alert"] a[href^="https://wa.me/5565992832422"]');
+        const link = document.querySelector<HTMLAnchorElement>('form [role="alert"] a[href^="https://wa.me/5565974009820"]');
         const text = link ? decodeURIComponent(new URL(link.href).searchParams.get("text") ?? "") : "";
         return { label: link?.textContent?.trim() ?? null, target: link?.target, carriesData: text.includes("Teste Validação") && text.includes("teste@example.com") && text.includes("Mensagem de teste.") };
       });

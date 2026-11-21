@@ -26,7 +26,7 @@ const STATUS_META: Record<QualificationStatus, { emoji: string; label: string }>
 
 // Compatível com o formato legado (formulário de contato: nome/whatsapp/
 // interesse/necessidade/empresa/segmento, sem score/status) e com o novo
-// lead qualificado pelo ZTech AI (inclui projectType/urgency/budget/score/
+// lead qualificado pelo MyCod AI (inclui projectType/urgency/budget/score/
 // status) — as seções extras só aparecem quando os campos correspondentes
 // estão presentes, então o formato legado continua idêntico ao de antes.
 export function buildLeadNotificationMessage(lead: LeadNotificationData): string {

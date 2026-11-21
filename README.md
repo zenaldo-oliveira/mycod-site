@@ -1,6 +1,6 @@
-# ZTech Solutions — site comercial
+# MyCod — site comercial
 
-Site da ZTech Solutions: sites, sistemas web e automações para pequenas e médias empresas. O visitante conhece as ofertas, vê projetos reais, monta um pedido de orçamento e fala com a ZTech pelo WhatsApp ou pelo formulário.
+Site da MyCod: sites, sistemas web e automações para pequenas e médias empresas. O visitante conhece as ofertas, vê projetos reais, monta um pedido de orçamento e fala com a MyCod pelo WhatsApp ou pelo formulário.
 
 Domínio atual: https://www.zenaldodev.com.br (definido em `lib/site.ts` como `SITE_URL`; canonical, sitemap e robots usam este endereço).
 

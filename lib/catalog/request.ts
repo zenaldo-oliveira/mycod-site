@@ -115,7 +115,7 @@ type MessageInput = {
   format: (value: Price) => string;
 };
 
-// Mensagem organizada para o WhatsApp da ZTech (negrito no formato do
+// Mensagem organizada para o WhatsApp da MyCod (negrito no formato do
 // WhatsApp). Não afirma valores que não estejam confirmados.
 export function buildRequestMessage({ state, quote, copy, format }: MessageInput): string {
   const m = copy.builder.message;

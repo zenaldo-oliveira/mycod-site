@@ -156,7 +156,7 @@ async function handleLegacyContactLead(body: Record<string, unknown>) {
   return Response.json({ success: true });
 }
 
-// ===== Caminho novo: lead qualificado pelo ZTech AI =====
+// ===== Caminho novo: lead qualificado pelo MyCod AI =====
 async function handleAiQualifiedLead(body: Record<string, unknown>) {
   if (!isNonEmptyString(body.name) || !isNonEmptyString(body.whatsapp)) {
     return Response.json({ error: "Dados inválidos" }, { status: 400 });
@@ -228,7 +228,7 @@ async function handleAiQualifiedLead(body: Record<string, unknown>) {
     budget,
     score,
     status,
-    origin: "Portfólio — ZTech AI",
+    origin: "Portfólio — MyCod AI",
     leadId: existing?.id,
   };
 

@@ -185,7 +185,7 @@ export const commercialEn: CommercialCopy = {
     detailsEyebrow: "Details",
     detailsTitle: "All solutions in detail",
     viewSite: "View site",
-    showcaseLabel: "Screenshots of websites built by ZTech",
+    showcaseLabel: "Screenshots of websites built by MyCod",
   },
 
   plansPage: {
@@ -265,7 +265,7 @@ export const commercialEn: CommercialCopy = {
     addonsTitle: "Add-ons",
     addonsDescription: "Items that can be added to any compatible plan.",
     externalTitle: "External costs",
-    externalDescription: "Third-party services some projects use. They are listed separately in the proposal and are not part of ZTech's fees.",
+    externalDescription: "Third-party services some projects use. They are listed separately in the proposal and are not part of MyCod's fees.",
     paymentNote: "This site does not process payments. Payment method and terms are agreed in the proposal.",
   },
 
@@ -307,14 +307,14 @@ export const commercialEn: CommercialCopy = {
     summaryDetails: "Details",
     summaryContact: "Contact",
     summaryTotal: "Estimate",
-    totalOnRequest: "Amounts on request. ZTech sends the proposal after reviewing the request.",
+    totalOnRequest: "Amounts on request. MyCod sends the proposal after reviewing the request.",
     scopeNote: "This solution requires discovery and scope definition before any amount.",
     noPaymentNote: "Nothing is charged now. Sending opens a WhatsApp chat with the summary below.",
     send: "Send via WhatsApp",
     sendHint: "Opens WhatsApp in a new tab with the message ready.",
     edit: "Edit",
     message: {
-      title: "New project request — ZTech website",
+      title: "New project request — MyCod website",
       solution: "Solution",
       needs: "Needs",
       addons: "Add-ons",
@@ -356,7 +356,7 @@ export const commercialEn: CommercialCopy = {
       { question: "Where is the website or system hosted?", answer: "Hosting is defined in the proposal, based on the type of solution and traffic." },
       { question: "Can I request changes after launch?", answer: "Yes. How changes are requested and charged is defined in the proposal." },
       { question: "How does AI usage work?", answer: "AI solutions use models from external providers, billed by usage volume. We estimate this cost during discovery and list it separately in the proposal." },
-      { question: "Which external services may have a cost?", answer: "Domain, professional email, AI usage, WhatsApp API providers and third-party tools. They are not part of ZTech's fees and are listed in the proposal." },
+      { question: "Which external services may have a cost?", answer: "Domain, professional email, AI usage, WhatsApp API providers and third-party tools. They are not part of MyCod's fees and are listed in the proposal." },
       { question: "Is there a minimum term or cancellation fee?", answer: "Contract and cancellation terms are defined in the commercial proposal, before anything is signed." },
       { question: "How is payment made?", answer: "This site does not process payments. Method and terms are agreed in the proposal." },
     ],
@@ -375,7 +375,7 @@ export const commercialEn: CommercialCopy = {
     requestProposal: "Request a proposal",
     primeHowTitle: "How Prime works",
     primeHow:
-      "The barbershop hires ZTech's system. The barbershop's customers subscribe to the barbershop's own haircut plans. Payment provider fees are external costs, listed in the proposal.",
+      "The barbershop hires MyCod's system. The barbershop's customers subscribe to the barbershop's own haircut plans. Payment provider fees are external costs, listed in the proposal.",
     resources: {
       services: "Service list",
       prices: "Price list",
@@ -396,7 +396,7 @@ export const commercialEn: CommercialCopy = {
         title: "Your barbershop online",
         benefit: "Landing page with services, prices, gallery, location and a WhatsApp button.",
         cta: "I want to showcase my barbershop",
-        imageAlt: "Home page of Barber Shop Premium, a barbershop website built by ZTech",
+        imageAlt: "Home page of Barber Shop Premium, a barbershop website built by MyCod",
       },
       agenda: {
         name: "Agenda",
@@ -427,7 +427,7 @@ export const commercialEn: CommercialCopy = {
 
   showcase: {
     eyebrow: "Services",
-    title: "What ZTech delivers for your business",
+    title: "What MyCod delivers for your business",
     description: "Choose the service and build your request in a few minutes. Available services have a standard scope; custom builds start with discovery.",
     receivesLabel: "What you get",
     requestProposal: "Request a proposal",
@@ -441,13 +441,13 @@ export const commercialEn: CommercialCopy = {
         name: "Landing pages",
         benefit: "A focused page to present your offer and receive inquiries on WhatsApp.",
         cta: "I want a landing page",
-        imageAlt: "Pet Shop Premium page, a landing page built by ZTech",
+        imageAlt: "Pet Shop Premium page, a landing page built by MyCod",
       },
       "business-site": {
         name: "Business websites",
         benefit: "A website with a page for each service, so your business is found and trusted.",
         cta: "I want my website",
-        imageAlt: "Barber Shop Premium home page, a website built by ZTech",
+        imageAlt: "Barber Shop Premium home page, a website built by MyCod",
       },
       booking: {
         name: "Online booking",
@@ -477,13 +477,13 @@ export const commercialEn: CommercialCopy = {
         name: "Custom systems and SaaS",
         benefit: "Software built for your process or to become a product sold by subscription.",
         cta: "I want a custom system",
-        imageAlt: "Screens of the Dieta IA app, built by ZTech",
+        imageAlt: "Screens of the Dieta IA app, built by MyCod",
       },
       "automation-ai": {
         name: "Automation and artificial intelligence",
         benefit: "Fewer manual tasks: data that moves on its own and customer service supported by AI.",
         cta: "I want to automate processes",
-        imageAlt: "Text To Voice AI screen, a web tool built by ZTech",
+        imageAlt: "Text To Voice AI screen, a web tool built by MyCod",
       },
     },
     resources: {
@@ -515,8 +515,8 @@ export const commercialEn: CommercialCopy = {
   },
 
   home: {
-    demoLabel: "Demo of a real ZTech project",
-    demoCaption: "Real projects built by ZTech",
+    demoLabel: "Demo of a real MyCod project",
+    demoCaption: "Real projects built by MyCod",
     demoPlay: "Play demo",
     demoPause: "Pause demo",
     offers: {
@@ -564,7 +564,7 @@ export const commercialEn: CommercialCopy = {
         },
         referenceLabel: "Real reference",
         reference:
-          "ZLift Manager is ZTech's own system for elevator maintenance companies. It brings together customers, equipment, technicians and service orders, with checklists, photos, signature and report.",
+          "ZLift Manager is MyCod's own system for elevator maintenance companies. It brings together customers, equipment, technicians and service orders, with checklists, photos, signature and report.",
         referenceLink: "See ZLift Manager",
       },
       barber: {
@@ -587,7 +587,7 @@ export const commercialEn: CommercialCopy = {
           problem: "Visitors who arrive from Google or an ad can't quickly find what they need and leave before calling.",
           example: "E.g.: a garage with one page for air conditioner servicing and a button straight to WhatsApp.",
           cta: "I want a landing page",
-          imageAlt: "Pet Shop Premium page, a landing page built by ZTech",
+          imageAlt: "Pet Shop Premium page, a landing page built by MyCod",
         },
         site: {
           name: "Business websites",
@@ -595,7 +595,7 @@ export const commercialEn: CommercialCopy = {
           problem: "Without a site that explains each service, clients ask for quotes without knowing what the company does.",
           example: "E.g.: a clinic with a page per specialty, the address on a map and a contact form.",
           cta: "I want a business website",
-          imageAlt: "Barber Shop Premium home page, a website built by ZTech",
+          imageAlt: "Barber Shop Premium home page, a website built by MyCod",
         },
         systems: {
           name: "Web systems and automations",
@@ -603,14 +603,14 @@ export const commercialEn: CommercialCopy = {
           problem: "Requests arrive scattered across WhatsApp and the team loses track of what was already handled.",
           example: "E.g.: a dashboard where each order moves from New to Done, with the client and service recorded.",
           cta: "I want a system or automation",
-          imageAlt: "Screens of the Dieta IA app, built by ZTech",
+          imageAlt: "Screens of the Dieta IA app, built by MyCod",
         },
       },
     },
     previews: {
       eyebrow: "Examples",
       title: "See the kind of work before you ask.",
-      description: "Screenshots of projects published by ZTech and a system prototype, labeled as an illustration. Switch between the examples.",
+      description: "Screenshots of projects published by MyCod and a system prototype, labeled as an illustration. Switch between the examples.",
       tablistLabel: "Project examples",
       realProject: "Real project",
       prototypeLabel: "Illustrative image · prototype",
@@ -623,7 +623,7 @@ export const commercialEn: CommercialCopy = {
     receives: {
       eyebrow: "What you get",
       title: "Compare what each entry includes.",
-      description: "Features from the ZTech catalog. Those marked as custom go into the proposal after the diagnosis.",
+      description: "Features from the MyCod catalog. Those marked as custom go into the proposal after the diagnosis.",
       tableCaption: "Features included in each entry",
       featureLabel: "Feature",
       included: "Included",
@@ -643,9 +643,9 @@ export const commercialEn: CommercialCopy = {
       existing: {
         title: "I already have a website",
         description: "Request a review of your current website: send the address and tell us what you want to improve, such as design, pages, WhatsApp contact or integrations.",
-        note: "The review is done by the ZTech team, not by an automated tool.",
+        note: "The review is done by the MyCod team, not by an automated tool.",
         cta: "Request a website review",
-        message: "Hi! I already have a website and would like to request a review from ZTech. Website address:",
+        message: "Hi! I already have a website and would like to request a review from MyCod. Website address:",
         opened: "WhatsApp opened in a new tab. Complete the message with your website address.",
       },
       formLink: "Prefer a form? Send a message",

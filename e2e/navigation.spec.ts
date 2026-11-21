@@ -1,6 +1,6 @@
 import { test } from "@playwright/test";
 import type { Page } from "@playwright/test";
-import { BASE, ROUTES, WA_EXISTING_SITE, WA_OFFICIAL, WIDTHS, createCheck, finish, newPage, settle } from "./support/helpers";
+import { BASE, ROUTES, WA_EXISTING_SITE, WA_OFFICIAL, WIDTHS, createCheck, finish, newPage, settle, skipIntro } from "./support/helpers";
 
 // Navegação global: Sidebar (desktop e drawer mobile), Top Bar, menu ⋮
 // (idioma/tema), recolhimento persistido, links de WhatsApp, âncoras, rodapé,
@@ -44,7 +44,7 @@ const isVisible = (page: Page, selector: string) =>
 
 const navLabels = (page: Page) =>
   page.evaluate(() =>
-    [...document.querySelectorAll("#sidebar nav a span.truncate")].map((s) => s.textContent).join(" "), // menu principal + "Sobre a ZTech" (base)
+    [...document.querySelectorAll("#sidebar nav a span.truncate")].map((s) => s.textContent).join(" "), // menu principal + "Sobre a MyCod" (base)
   );
 
 for (const width of WIDTHS) {
@@ -59,6 +59,8 @@ for (const width of WIDTHS) {
     }
 
     await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await skipIntro(page);
+
     const desktop = width >= 1024;
     const sidebarVisible = await isVisible(page, "#sidebar");
     const hamburger = await isVisible(page, 'header button[aria-controls="sidebar"]');
@@ -91,10 +93,10 @@ test("Sidebar desktop: menu comercial, item ativo, breadcrumb e Pedir orçamento
   const check = createCheck();
   const { context, page, errors } = await newPage(browser, 1440);
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
-
+  await skipIntro(page);
   const items: [string, string][] = [
     ["/services", "Sites e sistemas"], ["/plans", "Planos e valores"], ["/how-it-works", "Como funciona"],
-    ["/projects", "Projetos reais"], ["/about", "Sobre a ZTech"], ["/", "Início"],
+    ["/projects", "Projetos reais"], ["/about", "Sobre a MyCod"], ["/", "Início"],
   ];
   for (const [href, label] of items) {
     await page.click(`#sidebar nav a[href="${href}"]`);
@@ -141,7 +143,7 @@ test("Sidebar desktop: recolher, persistência sem flash e expandir", async ({ b
   const check = createCheck();
   const { context, page } = await newPage(browser, 1280);
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
-
+  await skipIntro(page);
   const btn = page.locator('#sidebar button[aria-controls="sidebar"]');
   check("botão recolher: aria-expanded=true (aberta)", (await btn.getAttribute("aria-expanded")) === "true");
   await btn.click();
@@ -179,7 +181,7 @@ test("menu ⋮ (desktop): teclado, Esc, clique fora, Tab, idioma e tema", async 
   const check = createCheck();
   const { context, page, errors } = await newPage(browser, 1440);
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
-
+  await skipIntro(page);
   const trigger = page.locator('#sidebar button[aria-haspopup="menu"]');
   check("⋮ fechado: aria-expanded=false", (await trigger.getAttribute("aria-expanded")) === "false");
   await trigger.focus();
@@ -227,7 +229,7 @@ test("menu ⋮ (desktop): teclado, Esc, clique fora, Tab, idioma e tema", async 
     open: !!document.querySelector('[role="menu"]'),
   }));
   const enNav = await navLabels(page);
-  check("EN: html lang=en, sidebar e CTA traduzidos, menu segue aberto", en.lang === "en" && enNav === "Home Websites and systems Plans and pricing How it works Real projects About ZTech" && en.cta === "Talk to ZTech" && en.open, { ...en, nav: enNav });
+  check("EN: html lang=en, sidebar e CTA traduzidos, menu segue aberto", en.lang === "en" && enNav === "Home Websites and systems Plans and pricing How it works Real projects About MyCod" && en.cta === "Talk to MyCod" && en.open, { ...en, nav: enNav });
   await page.click('[role="menuitemradio"]:has-text("Español")');
   await settle(page, 250);
   const es = await page.evaluate(() => ({
@@ -235,12 +237,12 @@ test("menu ⋮ (desktop): teclado, Esc, clique fora, Tab, idioma e tema", async 
     trig: document.querySelector('#sidebar button[aria-haspopup="menu"]')!.textContent!.trim(),
   }));
   const esNav = await navLabels(page);
-  check("ES: html lang=es, sidebar traduzida", es.lang === "es" && esNav === "Inicio Sitios y sistemas Planes y valores Cómo funciona Proyectos reales Sobre ZTech" && es.trig === "Preferencias", { ...es, nav: esNav });
+  check("ES: html lang=es, sidebar traduzida", es.lang === "es" && esNav === "Inicio Sitios y sistemas Planes y valores Cómo funciona Proyectos reales Sobre MyCod" && es.trig === "Preferencias", { ...es, nav: esNav });
   await page.click('[role="menuitemradio"]:has-text("Português")');
   await settle(page, 250);
   const ptLang = await page.evaluate(() => document.documentElement.lang);
   const ptNav = await navLabels(page);
-  check("PT: de volta, html lang=pt-BR", ptLang === "pt-BR" && ptNav === "Início Sites e sistemas Planos e valores Como funciona Projetos reais Sobre a ZTech", { lang: ptLang, nav: ptNav });
+  check("PT: de volta, html lang=pt-BR", ptLang === "pt-BR" && ptNav === "Início Sites e sistemas Planos e valores Como funciona Projetos reais Sobre a MyCod", { lang: ptLang, nav: ptNav });
   await page.screenshot({ path: test.info().outputPath("menu-open-1440.png") });
 
   // Tema
@@ -252,7 +254,7 @@ test("menu ⋮ (desktop): teclado, Esc, clique fora, Tab, idioma e tema", async 
     bg: getComputedStyle(document.body).backgroundColor,
     checked: [...document.querySelectorAll('[role="menuitemradio"][aria-checked="true"]')].map((e) => (e.textContent ?? "").trim()),
   }));
-  check("tema Claro aplicado e marcado", light.attr === "light" && light.stored === "light" && light.bg === "rgb(248, 250, 252)" && light.checked.includes("Claro"), light);
+  check("tema Claro aplicado e marcado", light.attr === "light" && light.stored === "light" && light.bg === "rgb(247, 244, 252)" && light.checked.includes("Claro"), light);
   await page.keyboard.press("Escape");
   await page.screenshot({ path: test.info().outputPath("home-light-1440.png") });
   await page.reload({ waitUntil: "domcontentloaded" });
@@ -264,7 +266,7 @@ test("menu ⋮ (desktop): teclado, Esc, clique fora, Tab, idioma e tema", async 
   await page.click('[role="menuitemradio"]:has-text("Escuro")');
   await settle(page, 250);
   const dark = await page.evaluate(() => ({ attr: document.documentElement.dataset.theme, bg: getComputedStyle(document.body).backgroundColor }));
-  check("tema Escuro restaurado", dark.attr === "dark" && dark.bg === "rgb(11, 17, 32)", dark); // --background do tema escuro (#0b1120)
+  check("tema Escuro restaurado", dark.attr === "dark" && dark.bg === "rgb(18, 12, 31)", dark); // --background do tema escuro (#120c1f)
   check("menu ⋮ sem erros de console", errors.length === 0, errors.slice(0, 2).join(" | "));
 
   await context.close();
@@ -276,6 +278,7 @@ for (const width of [360, 390, 768]) {
     const check = createCheck();
     const { context, page, errors } = await newPage(browser, width);
     await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await skipIntro(page);
     const hamb = page.locator('header button[aria-controls="sidebar"]');
 
     let s = await drawerState(page);
@@ -381,7 +384,7 @@ test("links do WhatsApp em / e /contact (390 e 1440px)", async ({ browser }) => 
       const links = await page.evaluate(() =>
         [...document.querySelectorAll<HTMLAnchorElement>('a[href^="https://wa.me"]')].map((a) => ({ href: a.href, target: a.target, rel: a.rel })),
       );
-      const bad = links.filter((l) => l.href !== new URL(l.href).href || !l.href.startsWith("https://wa.me/5565992832422") || l.target !== "_blank" || !l.rel.includes("noopener"));
+      const bad = links.filter((l) => l.href !== new URL(l.href).href || !l.href.startsWith("https://wa.me/5565974009820") || l.target !== "_blank" || !l.rel.includes("noopener"));
       const defaults = links.filter((l) => l.href === WA_OFFICIAL);
       // Home: o caminho "Já tenho um site" leva uma mensagem própria (só um link).
       const existing = route === "/" ? links.filter((l) => l.href === WA_EXISTING_SITE).length : 0;
@@ -401,6 +404,7 @@ test("âncoras da Home ficam abaixo da Top Bar", async ({ browser }) => {
   const check = createCheck();
   const { context, page } = await newPage(browser, 1440);
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
+  await skipIntro(page);
   for (const id of ["entradas", "exemplos", "processo", "duvidas", "contato"]) {
     await page.evaluate((i) => (location.hash = i), id);
     await settle(page, 300);
@@ -416,6 +420,7 @@ test("rodapé, botão flutuante e PageBackground", async ({ browser }) => {
   for (const width of [360, 390]) {
     const { context, page } = await newPage(browser, width);
     await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await skipIntro(page);
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await settle(page, 300);
     const o = await page.evaluate(() => {
@@ -431,6 +436,7 @@ test("rodapé, botão flutuante e PageBackground", async ({ browser }) => {
 
   const { context, page } = await newPage(browser, 1440);
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
+  await skipIntro(page);
   const bg = await page.evaluate(() => {
     const el = document.querySelector("body > div[aria-hidden='true'].fixed")!;
     const cs = getComputedStyle(el);
@@ -452,6 +458,7 @@ test("prefers-reduced-motion: drawer sem transição e funcional", async ({ brow
   const check = createCheck();
   const { context, page, errors } = await newPage(browser, 390, { reducedMotion: "reduce" });
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
+  await skipIntro(page);
   const dur = await page.evaluate(() => getComputedStyle(document.getElementById("sidebar")!).transitionDuration);
   check("reduced motion: drawer sem transição", dur.split(",").every((d) => parseFloat(d) === 0 || d.trim() === "0s" || parseFloat(d) < 0.001), dur);
   await page.click('header button[aria-controls="sidebar"]');

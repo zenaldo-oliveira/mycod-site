@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Logo } from "@/components/layout/Logo";
+import { CONTACT_EMAIL } from "@/lib/contact/email";
 import { buildWhatsAppUrl } from "@/lib/contact/whatsapp";
 import { useTranslations } from "@/lib/i18n/LanguageContext";
 import { MAIN_NAV, SECONDARY_NAV, SITE_NAME, SOCIAL_LINKS } from "@/lib/site";
@@ -21,8 +22,8 @@ const SOCIALS = [
   { label: "GitHub", href: SOCIAL_LINKS.github, Icon: FaGithub },
 ] as const;
 
-// Rodapé global, compacto. Sem CNPJ/e-mail enquanto não existirem dados
-// reais — adicionar aqui quando forem definidos.
+// Rodapé global, compacto. Contato: WhatsApp e e-mail (lib/contact). CNPJ
+// e endereço ficam de fora até existirem dados reais.
 export function Footer() {
   const t = useTranslations();
   const year = new Date().getFullYear();
@@ -84,6 +85,11 @@ export function Footer() {
                 className={LINK_CLASS}
               >
                 {t.footer.whatsapp}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${CONTACT_EMAIL}`} className={LINK_CLASS}>
+                {CONTACT_EMAIL}
               </a>
             </li>
           </ul>

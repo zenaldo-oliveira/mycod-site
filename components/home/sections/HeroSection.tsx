@@ -1,5 +1,6 @@
 "use client";
 
+import { WhatsAppCta } from "@/components/contact/WhatsAppCta";
 import { motion } from "framer-motion";
 import { HeroShowcase } from "@/components/home/HeroShowcase";
 import { AnimatedH1 } from "@/components/ui/AnimatedH1";
@@ -30,7 +31,7 @@ export function HeroSection() {
   const hero = useTranslations().home.hero;
 
   return (
-    <Section id="inicio" variant="hero" className="overflow-x-clip xl:pb-16">
+    <Section id="inicio" variant="hero" className="brand-hero overflow-x-clip xl:pb-16">
       <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14 xl:gap-20">
         <div className="min-w-0 max-w-xl lg:max-w-none">
           <AnimatedH1
@@ -50,9 +51,13 @@ export function HeroSection() {
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               {/* Ação principal: leva ao bloco de orçamento da própria home, que
                   não depende do número de WhatsApp ainda pendente. */}
-              <Button href="#contato" className="h-12 w-full whitespace-nowrap sm:w-auto">
-                {hero.ctaQuote}
-              </Button>
+              <WhatsAppCta
+                label={hero.ctaWhatsApp}
+                ariaLabel={hero.ctaWhatsApp}
+                variant="inverse"
+                size="md"
+                className="h-12 w-full whitespace-nowrap sm:w-auto"
+              />
 
               {/* Opção secundária: o configurador continua acessível em /build. */}
               <Button href="/build" variant="secondary" className="h-12 w-full whitespace-nowrap sm:w-auto">

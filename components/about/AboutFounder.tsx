@@ -9,9 +9,9 @@ import { Section } from "@/components/ui/Section";
 import { useTranslations } from "@/lib/i18n/LanguageContext";
 import { SOCIAL_LINKS } from "@/lib/site";
 
-const FOUNDER_NAME = "Zenaldo Oliveira";
+const FOUNDER_NAME = "Zenaldo Pereira de Oliveira";
 
-// Quem está por trás da ZTech: o fundador como prova de quem constrói — texto
+// Quem está por trás da MyCod: o fundador como prova de quem constrói — texto
 // curto e factual (vem do conteúdo existente), formação como detalhe
 // secundário e o LinkedIn como referência profissional.
 export function AboutFounder() {

@@ -14,13 +14,13 @@ type ContactData = {
   message: string;
 };
 
-// Mensagem enviada ao WhatsApp da ZTech com os dados do formulário — usada
+// Mensagem enviada ao WhatsApp da MyCod com os dados do formulário — usada
 // depois de registrar o contato e, se o registro falhar, como alternativa.
 function buildContactWhatsAppUrl({ name, whatsapp, email, message }: ContactData): string {
   const text = `
 
 
-🚀 Novo contato pelo site da ZTech
+🚀 Novo contato pelo site da MyCod
 
 👤 Nome: ${name}
 
@@ -277,7 +277,7 @@ export function ContactForm() {
             py-3
             text-sm
             font-semibold
-            text-background
+            text-white
             transition-all
             duration-300
             hover:scale-[1.01]

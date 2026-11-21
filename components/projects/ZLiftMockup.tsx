@@ -57,7 +57,7 @@ function OrderRow({ stageLabel, stage, isDone }: { stageLabel: string; stage: nu
   );
 }
 
-// Mockup CONCEITUAL do ZLift Manager (produto próprio da ZTech). Não existe
+// Mockup CONCEITUAL do ZLift Manager (produto próprio da MyCod). Não existe
 // screenshot real no projeto; quando existir, substituir a janela principal
 // por ela. Uma única sequência ao carregar: o cursor clica em "Nova ordem" e
 // uma ordem aparece no topo (espaço já reservado — sem deslocar o layout).
@@ -117,7 +117,7 @@ export function ZLiftMockup() {
             <div className="flex items-center justify-between gap-2">
               <p className="truncate text-xs font-semibold text-text-primary sm:text-sm">{m.ordersTitle}</p>
               <motion.span
-                className="inline-flex shrink-0 items-center gap-1 rounded-md bg-cta px-2 py-1 text-[10px] font-medium text-background"
+                className="inline-flex shrink-0 items-center gap-1 rounded-md bg-cta px-2 py-1 text-[10px] font-medium text-white"
                 animate={{ scale: [1, 0.92, 1] }}
                 transition={{ duration: 0.3, delay: 1.5 }}
               >

@@ -1,6 +1,6 @@
 import { test } from "@playwright/test";
 import type { Page } from "@playwright/test";
-import { BASE, ROUTES, createCheck, finish, newContext, newPage } from "./support/helpers";
+import { BASE, ROUTES, createCheck, finish, newContext, newPage, skipIntro } from "./support/helpers";
 
 // Background interativo (InteractiveBackground): variante por rota, luz que
 // segue o mouse com suavização, nenhum trabalho com o cursor parado, nada em
@@ -82,7 +82,7 @@ test("background: mouse — segue com suavização, para quando o cursor para", 
   const check = createCheck();
   const { context, page, errors } = await newPage(browser, 1440, { height: 900 });
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
-
+  await skipIntro(page);
   let s = await layerState(page);
   check("Home: inativo antes do primeiro movimento", s.active === null && s.glowOpacity === "0", s);
 
@@ -176,6 +176,7 @@ test("background: Sidebar recolhida e tema claro", async ({ browser }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
+  await skipIntro(page);
   await page.mouse.move(120, 500);
   await page.mouse.move(130, 510);
   await page.waitForTimeout(800);
@@ -206,6 +207,7 @@ test("background: touch e movimento reduzido ficam estáticos", async ({ browser
   const touch = await newContext(browser, { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
   const mobile = await touch.newPage();
   await mobile.goto(BASE + "/", { waitUntil: "networkidle" });
+  await skipIntro(mobile);
   await mobile.touchscreen.tap(200, 400);
   await mobile.mouse.move(150, 300);
   await mobile.waitForTimeout(500);
@@ -215,6 +217,7 @@ test("background: touch e movimento reduzido ficam estáticos", async ({ browser
 
   const { context, page } = await newPage(browser, 1440, { height: 900, reducedMotion: "reduce" });
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
+  await skipIntro(page);
   await page.mouse.move(400, 300);
   await page.mouse.move(600, 400);
   await page.waitForTimeout(500);

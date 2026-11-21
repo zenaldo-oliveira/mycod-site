@@ -145,7 +145,7 @@ export function Sidebar({ isDrawerOpen, onCloseDrawer }: SidebarProps) {
           />
 
           {/* Recolher/expandir no topo (desktop). Recolhida, o botão aparece
-              sobre o símbolo da ZTech no hover ou no foco por teclado. Sem
+              sobre o símbolo da MyCod no hover ou no foco por teclado. Sem
               aria-label: o nome vem do texto oculto (padrão das suítes E2E). */}
           <div className="sidebar-tip sidebar-tip--always hidden lg:block lg:sidebar-collapsed:absolute lg:sidebar-collapsed:inset-0 lg:sidebar-collapsed:flex lg:sidebar-collapsed:items-center lg:sidebar-collapsed:justify-center">
             <button
@@ -211,7 +211,7 @@ function QuoteLink({ label, isActive, onNavigate }: { label: string; isActive: b
         href={QUOTE_NAV.href}
         aria-current={isActive ? "page" : undefined}
         onClick={onNavigate}
-        className="flex h-10 items-center justify-center gap-2 rounded-md bg-cta px-3 text-sm font-semibold text-background transition-colors duration-150 hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-[current=page]:ring-2 aria-[current=page]:ring-accent/60 lg:sidebar-collapsed:px-0"
+        className="flex h-10 items-center justify-center gap-2 rounded-md bg-cta px-3 text-sm font-semibold text-white transition-colors duration-150 hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-[current=page]:ring-2 aria-[current=page]:ring-accent/60 lg:sidebar-collapsed:px-0"
       >
         <ClipboardList size={16} strokeWidth={2} aria-hidden="true" className="shrink-0" />
         <span className="truncate lg:sidebar-collapsed:sr-only">{label}</span>

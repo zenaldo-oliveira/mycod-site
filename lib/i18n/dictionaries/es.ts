@@ -4,7 +4,7 @@ import type { Dictionary } from "@/lib/i18n/types";
 export const es: Dictionary = {
   nav: {
     home: "Inicio",
-    about: "Sobre ZTech",
+    about: "Sobre MyCod",
     services: "Sitios y sistemas",
     plans: "Planes y valores",
     build: "Armar mi proyecto",
@@ -47,9 +47,9 @@ export const es: Dictionary = {
     rights: "Todos los derechos reservados.",
   },
   cta: {
-    talk: "Hablar con ZTech",
+    talk: "Hablar con MyCod",
     whatsappAriaLabel:
-      "Hablar con ZTech por WhatsApp (se abre en una nueva pestaña)",
+      "Hablar con MyCod por WhatsApp (se abre en una nueva pestaña)",
     whatsappHint: "por WhatsApp (se abre en una nueva pestaña)",
   },
   globalControls: {
@@ -99,7 +99,7 @@ export const es: Dictionary = {
           question: "¿Hacen limpieza de aire acondicionado? ¿Cuánto cuesta?",
           answer: "¡Sí! ¿Cuántos equipos son? Registro tu pedido y el equipo confirma el valor.",
           tag: "Pedido registrado en el panel",
-          botName: "Automatización ZTech",
+          botName: "Automatización MyCod",
         },
       },
       services: [
@@ -108,8 +108,8 @@ export const es: Dictionary = {
         { name: "Automatizaciones con IA", benefit: "Respuestas y pedidos organizados sin trabajo manual." },
       ],
       chat: {
-        header: "ZTech Solutions",
-        outgoing: "¡Hola! Llegué desde el sitio de ZTech Solutions y quisiera pedir un presupuesto para mi negocio. ¿Me puedes ayudar?",
+        header: "MyCod",
+        outgoing: "¡Hola! Llegué desde el sitio de MyCod y quisiera pedir un presupuesto para mi negocio. ¿Me puedes ayudar?",
         outgoingMeta: "mensaje preestablecido",
         reply: "¡Hola! Gracias por escribirnos. Cuéntame qué servicio necesitas.",
       },
@@ -175,17 +175,17 @@ export const es: Dictionary = {
       subtitle: "Transformemos tu idea en software.",
       description:
         "Cuéntanos cómo trabaja tu empresa hoy. Vamos a entender el problema y evaluar cómo la tecnología puede transformar ese proceso.",
-      cta: "Hablar con ZTech",
+      cta: "Hablar con MyCod",
       secondary: "¿Prefieres un formulario? Enviar mensaje",
     },
   },
   about: {
-    eyebrow: "Sobre ZTech Solutions",
+    eyebrow: "Sobre MyCod",
     title:
       "Tecnología para transformar problemas reales en soluciones digitales.",
     description:
-      "ZTech Solutions desarrolla sistemas web, SaaS, aplicaciones, automatizaciones y soluciones con inteligencia artificial para empresas que quieren digitalizar procesos y ganar más control sobre sus operaciones.",
-    cta: "Hablar con ZTech",
+      "MyCod desarrolla sistemas web, SaaS, aplicaciones, automatizaciones y soluciones con inteligencia artificial para empresas que quieren digitalizar procesos y ganar más control sobre sus operaciones.",
+    cta: "Hablar con MyCod",
     secondaryCta: "Explorar casos",
     capabilitiesTitle: "Lo que desarrollamos",
     proof: {
@@ -196,10 +196,10 @@ export const es: Dictionary = {
     },
     founder: {
       eyebrow: "Fundador",
-      title: "Quién está detrás de ZTech",
-      role: "Fundador de ZTech Solutions",
+      title: "Quién está detrás de MyCod",
+      role: "Fundador de MyCod",
       body: [
-        "ZTech Solutions es fundada por Zenaldo Oliveira, desarrollador full stack con formación en Análisis y Desarrollo de Sistemas, que construye aplicaciones modernas con React, Next.js, TypeScript, Prisma y PostgreSQL.",
+        "MyCod es fundada por Zenaldo Pereira de Oliveira, desarrollador full stack con formación en Análisis y Desarrollo de Sistemas, que construye aplicaciones modernas con React, Next.js, TypeScript, Prisma y PostgreSQL.",
         "Además del desarrollo, cuenta con formación técnica en Electrotecnia y conocimientos en Investigación Digital (OSINT) — una combinación que fortalece la resolución de problemas y el pensamiento analítico detrás de cada solución entregada.",
       ],
       formationTitle: "Formación",
@@ -226,7 +226,7 @@ export const es: Dictionary = {
     },
     finalCta: {
       title: "¿Tienes un proceso que puede ser mejor?",
-      subtitle: "Cuéntale a ZTech lo que tu empresa necesita.",
+      subtitle: "Cuéntale a MyCod lo que tu empresa necesita.",
     },
   },
   projects: {
@@ -320,8 +320,8 @@ export const es: Dictionary = {
   contact: {
     eyebrow: "Contacto",
     title: "Hablemos sobre tu proyecto.",
-    channelsTitle: "Habla directamente con ZTech",
-    whatsappCta: "Hablar con ZTech",
+    channelsTitle: "Habla directamente con MyCod",
+    whatsappCta: "Hablar con MyCod",
     responseLabel: "Tiempo de respuesta",
     responseValue: "En 24h",
     otherChannels: "Otros canales",

@@ -2,7 +2,7 @@ import { test } from "@playwright/test";
 import type { Page } from "@playwright/test";
 import { ADDONS, EXTERNAL_COSTS, getOfferPricing, getServiceOffer, isOfferCustom, PLANS, PLANS_SHOWCASE, SOLUTIONS } from "../lib/catalog/data";
 import { formatPrice, quoteSelection } from "../lib/catalog/pricing";
-import { BASE, createCheck, finish, headingText, newPage } from "./support/helpers";
+import { BASE, createCheck, finish, headingText, newPage, skipIntro } from "./support/helpers";
 
 // Área comercial: catálogo (cálculo puro), Soluções, Planos, Montar meu
 // projeto, Como funciona e Dúvidas. As verificações de preço derivam do
@@ -10,7 +10,7 @@ import { BASE, createCheck, finish, headingText, newPage } from "./support/helpe
 // "Solicitar proposta" (Planos) ou "Sob consulta" (resumo) — o teste
 // acompanha quando um preço for confirmado.
 
-const WA_NUMBER = "5565992832422";
+const WA_NUMBER = "5565974009820";
 const CUSTOM = SOLUTIONS.filter((s) => s.availability === "custom").map((s) => s.id);
 const AVAILABLE = SOLUTIONS.filter((s) => s.availability === "available").map((s) => s.id);
 const CONFIRMED_PRICES =
@@ -115,8 +115,21 @@ test("/services#sites: carrossel de capturas reais — setas, indicadores, tecla
 
   const { context, page, errors } = await newPage(browser, 1440, { height: 900 });
   await page.goto(BASE + "/services", { waitUntil: "networkidle" });
-  const others = await page.evaluate(() => [...document.querySelectorAll("#detalhes article[id]:not(#sites)")].map((a) => !!a.querySelector('[aria-hidden="true"] [data-zoom]')));
-  check("os outros 6 serviços mantêm a ilustração decorativa", others.length === 6 && others.every(Boolean), others);
+  // Catálogo e CRM mostram imagem do projeto (figure com <img>); os outros 4
+  // mantêm a ilustração decorativa. Ver ServicesContent.tsx.
+  const PHOTO_SERVICES = ["catalog", "crm"];
+  const others = await page.evaluate(() =>
+    [...document.querySelectorAll("#detalhes article[id]:not(#sites)")].map((a) => ({
+      id: a.id,
+      decorative: !!a.querySelector('[aria-hidden="true"] [data-zoom]'),
+      photo: !!a.querySelector("figure img"),
+    })),
+  );
+  check(
+    "outros 6 serviços: catálogo e CRM com imagem do projeto; os demais com ilustração decorativa",
+    others.length === 6 && others.every((o) => (PHOTO_SERVICES.includes(o.id) ? o.photo && !o.decorative : o.decorative && !o.photo)),
+    others,
+  );
   await page.locator("#sites").scrollIntoViewIfNeeded();
   await page.waitForTimeout(400);
   let s = await state(page);
@@ -363,7 +376,7 @@ test("/build: fluxo completo, validação, voltar preserva e mensagem do WhatsAp
   check("envio: link real do WhatsApp em nova aba", summary.href.startsWith(`https://wa.me/${WA_NUMBER}`) && summary.target === "_blank" && !!summary.rel?.includes("noopener"), summary.href.slice(0, 40));
   check(
     "mensagem organizada com todos os dados",
-    ["*Nova solicitação de projeto — site ZTech*", "*Solução:* Landing pages e sites empresariais (Disponível)", "- Landing page (uma página)", "- Páginas adicionais", "*Detalhes:*", "*Estimativa:* Implantação: Sob consulta · Mensalidade: Sob consulta", "Nome: Maria Teste", "Empresa: Loja Exemplo", "Segmento: Varejo", "WhatsApp: 65 99999-0000", "E-mail: maria@example.com"].every((x) =>
+    ["*Nova solicitação de projeto — site MyCod*", "*Solução:* Landing pages e sites empresariais (Disponível)", "- Landing page (uma página)", "- Páginas adicionais", "*Detalhes:*", "*Estimativa:* Implantação: Sob consulta · Mensalidade: Sob consulta", "Nome: Maria Teste", "Empresa: Loja Exemplo", "Segmento: Varejo", "WhatsApp: 65 99999-0000", "E-mail: maria@example.com"].every((x) =>
       summary.message.includes(x),
     ),
     summary.message,
@@ -486,7 +499,9 @@ test("barbearia: 3 cards, imagens identificadas, Sob medida e preço só se conf
   await openBarberTab(page);
   let c = await cards(page);
   check("aba Barbearias e salões dentro de Sites e sistemas", (await page.evaluate(() => document.querySelector('#segmentos [role="tabpanel"] h3')?.textContent)) === "Do site à agenda e ao clube de assinatura.");
-  check("1440px: três cards lado a lado", c.length === 3 && c.every((x) => x.top === c[0].top) && c[0].left < c[1].left && c[1].left < c[2].left, c.map((x) => [x.top, x.left]));
+  // Tolerância de 2px no topo: o Reveal (entrada animada, com atraso por card)
+  // pode deixar o topo 1px fora do alinhamento enquanto a animação termina.
+  check("1440px: três cards lado a lado", c.length === 3 && c.every((x) => Math.abs(x.top - c[0].top) <= 2) && c[0].left < c[1].left && c[1].left < c[2].left, c.map((x) => [x.top, x.left]));
   check(
     "CTAs abrem o fluxo com segmento e plano",
     JSON.stringify(c.map((x) => x.cta)) ===
@@ -507,7 +522,7 @@ test("barbearia: 3 cards, imagens identificadas, Sob medida e preço só se conf
   check('sem valor confirmado: "Solicitar proposta" em vez de implantação/mensalidade', hasConfirmedPrice || c.every((x) => x.text.includes("Solicitar proposta") && !x.text.includes("R$")));
   check(
     "Prime explica quem contrata e quem assina, sem prometer receita",
-    c[2].text.includes("A barbearia contrata o sistema da ZTech") && c[2].text.includes("assinam os planos de corte da própria barbearia") && !/garant|aumento|lucro|fatur/i.test(c.map((x) => x.text).join(" ")),
+    c[2].text.includes("A barbearia contrata o sistema da MyCod") && c[2].text.includes("assinam os planos de corte da própria barbearia") && !/garant|aumento|lucro|fatur/i.test(c.map((x) => x.text).join(" ")),
   );
   check("sem erros de console", errors.length === 0, errors.slice(0, 2));
   await context.close();
@@ -576,6 +591,7 @@ test("percurso: entrada da Home → serviço selecionado → resumo → contato"
   const check = createCheck();
   const { context, page, errors } = await newPage(browser, 1440, { height: 900 });
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
+  await skipIntro(page);
   await page.evaluate(() => document.getElementById("entradas")!.scrollIntoView());
   await page.locator('#entradas a[href="/build?service=landing"]').click();
   await page.waitForURL(BASE + "/build?service=landing");

@@ -8,37 +8,47 @@
 
 /* Tokens de tema. Base grafite quase preta com superfícies azul-marinho
    muito escuras (não preto absoluto), bordas finas, cinzas suaves e
-   off-white; o azul da marca ZTech aparece só em CTA, estado ativo, foco e
+   off-white; o roxo da marca MyCod aparece só em CTA, estado ativo, foco e
    interação. [data-theme="light"] é aplicado no <html> pelo script
    anti-flash de app/layout.tsx e alterado por useTheme (lib/preferences) —
    escolha explícita do usuário, não prefers-color-scheme. Contrastes
    verificados (WCAG AA): text-secondary ≥ 7:1 e text-muted ≥ 5:1 sobre
-   background/surface/surface-strong; texto branco sobre --cta ≈ 5.2:1. */
+   background/surface/surface-strong; texto branco sobre --cta ≈ 5.3:1 no
+   tema escuro e ≈ 9.5:1 no claro. */
 :root {
   /* Paleta da marca (dark): azul-marinho, superfícies, azul para ações,
      violeta para detalhes de IA e verde reservado ao WhatsApp. */
-  --background: #0b1120;
-  --foreground: #f1f5f9;
-  --surface: #111c30;
-  --surface-strong: #182540;
-  --surface-muted: rgba(148, 163, 184, 0.08);
-  --surface-overlay: rgba(17, 28, 48, 0.97);
-  --border: rgba(148, 163, 184, 0.13);
-  --border-strong: rgba(148, 163, 184, 0.26);
-  --border-accent: rgba(96, 165, 250, 0.35);
-  --text-primary: #f1f5f9;
-  --text-secondary: #a3b0c2;
-  --text-muted: #8190a5;
-  --accent: #60a5fa;
-  --accent-strong: #3b82f6;
-  /* Ações: texto escuro sobre o azul (contraste ≈ 7:1 com --background). */
-  --cta: #60a5fa;
-  --cta-hover: #93c5fd;
-  --ring: #60a5fa;
-  --ai: #a78bfa;
+  --background: #120c1f;
+  --foreground: #f5f3fa;
+  --surface: #1b1330;
+  --surface-strong: #261a45;
+  --surface-muted: rgba(185, 163, 240, 0.08);
+  --surface-overlay: rgba(27, 19, 48, 0.97);
+  --border: rgba(185, 163, 240, 0.14);
+  --border-strong: rgba(185, 163, 240, 0.28);
+  --border-accent: rgba(185, 163, 240, 0.35);
+  --text-primary: #f5f3fa;
+  --text-secondary: #cfc5e3;
+  --text-muted: #b3a7cc;
+  --accent: #b9a3f0;
+  --accent-strong: #9d82e6;
+  /* Ações no tema escuro: roxo mais claro que o da marca (#53377e), para o
+     botão se destacar do fundo. Texto branco ≈ 5.3:1; borda do botão contra
+     --background ≈ 3.6:1 (não textual, WCAG 1.4.11 exige 3:1). */
+  --cta: #7a5bb0;
+  --cta-hover: #6a4a9e;
+  --ring: #b9a3f0;
+  --ai: #b9a3f0;
   --whatsapp: #22c55e;
   /* Brilho do StarBorder (botões principais de contratação). */
-  --star-border-color: #93c5fd;
+  --star-border-color: #b9a3f0;
+
+  /* Identidade MyCod: roxos da vinheta e lavanda das seções claras. */
+  --brand-purple: #53377e;
+  --brand-purple-deep: #422a69;
+  --brand-purple-light: #593d86;
+  --brand-lavender: #f7f4fc;
+  --brand-ink: #211733;
 
   --sidebar-width: 15rem;
   --topbar-height: 3.5rem;
@@ -53,22 +63,22 @@
   --space-header-gap: clamp(1.5rem, 1.129rem + 1.524vw, 2.5rem); /* 24 → 40px: SectionHeader → conteúdo */
   /* Sidebar (desktop) e Top Bar rolada: levemente translúcidas sobre o
      PageBackground — mais leves que uma superfície sólida. */
-  --sidebar-bg: rgba(8, 12, 20, 0.72);
-  --topbar-bg: rgba(8, 12, 20, 0.78);
+  --sidebar-bg: rgba(18, 12, 31, 0.72);
+  --topbar-bg: rgba(18, 12, 31, 0.78);
 
   /* PageBackground — cenário discreto; o conteúdo é o protagonista. */
-  --bg-glow: rgba(96, 165, 250, 0.10);
-  --bg-glow-accent: rgba(167, 139, 250, 0.07);
-  --bg-glow-deep: rgba(30, 58, 138, 0.14);
-  --bg-grid: rgba(148, 163, 184, 0.045);
+  --bg-glow: rgba(185, 163, 240, 0.10);
+  --bg-glow-accent: rgba(83, 55, 126, 0.16);
+  --bg-glow-deep: rgba(66, 42, 105, 0.22);
+  --bg-grid: rgba(185, 163, 240, 0.045);
   --bg-media-opacity: 0.3;
   --bg-media-overlay: rgba(8, 12, 20, 0.8);
   /* Luz que acompanha o mouse (InteractiveBackground). */
-  --pointer-glow: rgba(59, 130, 246, 0.22);
-  --pointer-grid: rgba(96, 165, 250, 0.22);
+  --pointer-glow: rgba(83, 55, 126, 0.30);
+  --pointer-grid: rgba(185, 163, 240, 0.22);
 
   /* Tokens do shadcn/ui (componentes de registro), alinhados à paleta da
-     ZTech pela função de cada um. Apontam para os tokens acima, então
+     MyCod pela função de cada um. Apontam para os tokens acima, então
      acompanham [data-theme="light"] sem duplicar valores. Nenhum
      componente atual os usa; existem para componentes futuros nascerem
      com a paleta certa. */
@@ -82,16 +92,16 @@
   --secondary-foreground: var(--text-primary);
   --muted: var(--surface-strong);
   --muted-foreground: var(--text-muted);
-  /* --accent é o azul de destaque da ZTech (texto e ícones); sobre ele, o
+  /* --accent é o azul de destaque da MyCod (texto e ícones); sobre ele, o
      texto usa o fundo da página (contraste ≥ 4.5:1 nos dois temas). */
   --accent-foreground: var(--background);
   --destructive: #f87171;
   --input: var(--border-strong);
-  --chart-1: #60a5fa;
-  --chart-2: #3b82f6;
-  --chart-3: #2563eb;
-  --chart-4: #93c5fd;
-  --chart-5: #1d4ed8;
+  --chart-1: #b9a3f0;
+  --chart-2: #9d82e6;
+  --chart-3: #593d86;
+  --chart-4: #d6c9f5;
+  --chart-5: #53377e;
   --radius: 0.625rem;
   --sidebar: var(--surface);
   --sidebar-foreground: var(--text-primary);
@@ -108,34 +118,34 @@ html[data-sidebar="collapsed"] {
 }
 
 [data-theme="light"] {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #f7f4fc;
+  --foreground: #211733;
   --surface: #ffffff;
-  --surface-strong: #f1f5f9;
-  --surface-muted: rgba(15, 23, 42, 0.05);
+  --surface-strong: #efeaf8;
+  --surface-muted: rgba(33, 23, 51, 0.05);
   --surface-overlay: rgba(255, 255, 255, 0.97);
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --border-accent: rgba(37, 99, 235, 0.3);
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #5b6b80;
-  --accent: #2563eb;
-  --accent-strong: #1d4ed8;
-  --cta: #2563eb;
-  --cta-hover: #1d4ed8;
-  --ring: #2563eb;
-  --star-border-color: #3b82f6;
+  --border: #e2dcef;
+  --border-strong: #cbc1e0;
+  --border-accent: rgba(83, 55, 126, 0.3);
+  --text-primary: #211733;
+  --text-secondary: #4a3d66;
+  --text-muted: #5e5079;
+  --accent: #53377e;
+  --accent-strong: #422a69;
+  --cta: #53377e;
+  --cta-hover: #422a69;
+  --ring: #53377e;
+  --star-border-color: #593d86;
   /* shadcn/ui: só o que não deriva dos tokens acima. */
   --destructive: #dc2626;
 
-  --sidebar-bg: rgba(248, 250, 252, 0.72);
-  --topbar-bg: rgba(248, 250, 252, 0.8);
+  --sidebar-bg: rgba(247, 244, 252, 0.72);
+  --topbar-bg: rgba(247, 244, 252, 0.8);
 
-  --bg-glow: rgba(59, 130, 246, 0.08);
-  --bg-glow-accent: rgba(14, 165, 233, 0.05);
-  --bg-glow-deep: rgba(99, 102, 241, 0.04);
-  --bg-grid: rgba(15, 23, 42, 0.045);
+  --bg-glow: rgba(83, 55, 126, 0.08);
+  --bg-glow-accent: rgba(89, 61, 134, 0.06);
+  --bg-glow-deep: rgba(66, 42, 105, 0.05);
+  --bg-grid: rgba(33, 23, 51, 0.045);
   --bg-media-opacity: 0.18;
   --bg-media-overlay: rgba(248, 250, 252, 0.82);
   --pointer-glow: rgba(37, 99, 235, 0.11);
@@ -173,6 +183,8 @@ html[data-sidebar="collapsed"] {
   --color-ai: var(--ai);
   --color-whatsapp: var(--whatsapp);
   --color-ring: var(--ring);
+  --color-brand-deep: var(--brand-purple-deep);
+  --color-brand-lavender: var(--brand-lavender);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -587,4 +599,14 @@ body {
   html {
     @apply font-sans;
   }
+}
+/* Primeira seção da home: gradiente da vinheta com texto branco. Sobrescreve
+   os tokens de texto só dentro da seção, então o restante do site não muda. */
+.brand-hero {
+  background: radial-gradient(ellipse at center, #593d86 0%, #53377e 45%, #422a69 100%);
+  --text-primary: #ffffff;
+  --text-secondary: #ece6fa;
+  --text-muted: #d9cfee;
+  --border: rgba(255, 255, 255, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.32);
 }

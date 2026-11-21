@@ -23,7 +23,7 @@ export function StarBorder({ href, children, className = "", speed = "6s", exter
     <>
       <span aria-hidden="true" className="star-border__glow star-border__glow--bottom" />
       <span aria-hidden="true" className="star-border__glow star-border__glow--top" />
-      <span className="star-border__inner inline-flex h-10 w-full items-center justify-center gap-2 rounded-[0.45rem] bg-cta px-5 text-sm font-medium text-background transition-[background-color,transform] duration-150 group-hover:bg-cta-hover group-active:scale-[0.98] motion-reduce:group-active:scale-100">
+      <span className="star-border__inner inline-flex h-10 w-full items-center justify-center gap-2 rounded-[0.45rem] bg-cta px-5 text-sm font-medium text-white transition-[background-color,transform] duration-150 group-hover:bg-cta-hover group-active:scale-[0.98] motion-reduce:group-active:scale-100">
         {children}
       </span>
     </>

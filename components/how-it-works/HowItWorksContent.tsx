@@ -9,7 +9,7 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { useTranslations } from "@/lib/i18n/LanguageContext";
 
-// /how-it-works: as 7 etapas, com o que a ZTech faz e o que o cliente faz em
+// /how-it-works: as 7 etapas, com o que a MyCod faz e o que o cliente faz em
 // cada uma; depois, implantação e mensalidade e as dúvidas frequentes.
 export function HowItWorksContent() {
   const t = useTranslations();

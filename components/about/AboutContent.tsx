@@ -13,7 +13,7 @@ export function AboutContent() {
 
   return (
     <>
-      {/* Apresentação da ZTech e do público que atende */}
+      {/* Apresentação da MyCod e do público que atende */}
       <AboutHero />
 
       {/* Quem está por trás da empresa */}

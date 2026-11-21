@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { Brain, Globe, Layers, Plug, Smartphone, Workflow } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { MycodMark } from "@/components/brand/MycodMark";
 import { WhatsAppCta } from "@/components/contact/WhatsAppCta";
 import { AnimatedH1 } from "@/components/ui/AnimatedH1";
 import { Button } from "@/components/ui/Button";
@@ -16,7 +16,7 @@ import { useTranslations } from "@/lib/i18n/LanguageContext";
 const ICONS: LucideIcon[] = [Globe, Layers, Smartphone, Brain, Workflow, Plug];
 
 // Hero do /about: a empresa é a protagonista. Texto + painel com o slogan da
-// marca e o que a ZTech desenvolve (conteúdo real, sem números).
+// marca e o que a MyCod desenvolve (conteúdo real, sem números).
 export function AboutHero() {
   const t = useTranslations();
   const a = t.about;
@@ -50,16 +50,15 @@ export function AboutHero() {
         <Reveal delay={0.1}>
           <div className="rounded-2xl border border-border bg-surface/70 p-6 sm:p-8">
             <div className="flex items-center gap-3 border-b border-border pb-5">
-              <Image
-                src="/brand/ztech-mark.png"
-                alt=""
-                width={36}
-                height={36}
-                className="h-9 w-9 rounded-md"
-              />
+              <span
+                aria-hidden="true"
+                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[var(--brand-purple)] text-white"
+              >
+                <MycodMark className="h-5 w-auto" />
+              </span>
               <div>
                 <p className="text-sm font-semibold text-text-primary">
-                  ZTech Solutions
+                  MyCod
                 </p>
                 <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
                   {t.brand.tagline}
