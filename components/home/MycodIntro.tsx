@@ -13,7 +13,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const SRC = "/brand/MyCod-vinheta.mp4";
 // Cor de fundo da camada, enquanto o vídeo não ocupa a tela.
 const BACKGROUND = "#442c6a";
-const FADE_MS = 400;
+const FADE_MS = 150;
 const START_TIMEOUT_MS = 3000;
 
 type Phase = "playing" | "leaving" | "done";
