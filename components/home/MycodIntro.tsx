@@ -1,15 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 // Abertura da marca MyCod sobre a home: só a vinheta, sem textos nem controles.
-// Aparece uma única vez por navegador (localStorage). Tenta tocar com som; se o
-// navegador bloquear o áudio, toca no mudo, sem avisos. Esc fecha a abertura.
-// Ao terminar, a falhar ou demorar para iniciar, libera a home com um fade
-// curto. Com prefers-reduced-motion, a home aparece direto.
+// Toca a cada carregamento completo da página (recarregar a aba exibe de novo).
+// Navegação interna pelo menu não repete. Tenta tocar com som; se o navegador
+// bloquear, toca no mudo e, no primeiro toque ou tecla do visitante, libera o
+// áudio. Esc fecha a abertura. Ao terminar, falhar ou demorar para iniciar,
+// libera a home com um fade curto. Com prefers-reduced-motion, a home aparece
+// direto (ver a classe motion-reduce:hidden no marcado).
 
 const SRC = "/brand/MyCod-vinheta.mp4";
-const STORAGE_KEY = "mycod-intro-shown-v1";
 // Cor das bordas do vídeo aprovado. A máscara de borda apaga o quadro sobre ela.
 const BACKGROUND = "#442c6a";
 const FADE_MS = 400;
@@ -17,43 +18,42 @@ const START_TIMEOUT_MS = 3000;
 const MASK = "radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%)";
 
 type Phase = "playing" | "leaving" | "done";
+type Decision = "play" | "skip";
 
-function subscribeNothing() {
-  return () => {};
-}
-
-// Decide se a vinheta toca. No servidor e na hidratação responde "done", então
-// nada aparece antes de o cliente decidir. A flag só é gravada quando o vídeo
-// começa (ver onPlaying), e a fase fica em `override` a partir daí, para que
-// essa gravação não desmonte a vinheta no meio da exibição.
-function readInitialPhase(): Phase {
-  try {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return "done";
-    if (window.localStorage.getItem(STORAGE_KEY) === "1") return "done";
-  } catch {
-    // Sem localStorage ou media query: a vinheta toca.
-  }
-  return "playing";
-}
+// Marca, por carregamento da página, que a abertura já foi decidida. Um reload
+// reinicia este módulo e a abertura volta; trocar de rota no site não.
+let decidedThisLoad = false;
 
 export function MycodIntro() {
-  const initialPhase = useSyncExternalStore(subscribeNothing, readInitialPhase, () => "done" as Phase);
-  const [override, setOverride] = useState<Phase | null>(null);
-  const phase = override ?? initialPhase;
+  // Renderiza a camada já no servidor e na hidratação: nada de flash da home.
+  const [phase, setPhase] = useState<Phase>("playing");
+  const decisionRef = useRef<Decision | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const startedRef = useRef(false);
+
+  const isPlaying = () => phase === "playing" && decisionRef.current === "play";
 
   // Encerra: para o vídeo e começa o fade para a home.
   const finish = useCallback(() => {
     videoRef.current?.pause();
-    setOverride((current) => (current === "leaving" || current === "done" ? current : "leaving"));
+    setPhase((current) => (current === "playing" ? "leaving" : current));
+  }, []);
+
+  // Decide uma vez por montagem. Strict mode mantém a ref entre os ciclos de
+  // efeito, então a decisão não muda no meio do caminho.
+  useEffect(() => {
+    if (decisionRef.current === null) {
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const skip = reduced || decidedThisLoad;
+      decisionRef.current = skip ? "skip" : "play";
+      if (!skip) decidedThisLoad = true;
+    }
+    if (decisionRef.current === "skip") setPhase("done");
   }, []);
 
   // Começa com som; se o navegador bloquear, volta ao mudo. Sem aviso, sem botão.
-  // Se tiver começado no mudo, o primeiro toque ou tecla do visitante durante
-  // a abertura libera o áudio: navegadores só permitem som após um gesto.
   useEffect(() => {
-    if (phase !== "playing") return;
+    if (!isPlaying()) return;
     const video = videoRef.current;
     if (!video) return;
     let unlock: (() => void) | null = null;
@@ -87,52 +87,62 @@ export function MycodIntro() {
     });
 
     return removeUnlock;
+    // isPlaying depende de phase; o efeito roda uma vez por fase "playing".
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, finish]);
 
   // Demora para iniciar: libera a home.
   useEffect(() => {
-    if (phase !== "playing") return;
+    if (!isPlaying()) return;
     const timer = window.setTimeout(() => {
       if (!startedRef.current) finish();
     }, START_TIMEOUT_MS);
     return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, finish]);
 
   // Trava a rolagem da home enquanto a vinheta toca.
   useEffect(() => {
-    if (phase !== "playing") return;
+    if (!isPlaying()) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = previous;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
 
   // Teclado: Esc fecha a abertura. Tab fica preso à camada, que não tem
   // controles, para o foco não cair na home escondida.
   useEffect(() => {
-    if (phase !== "playing") return;
+    if (!isPlaying()) return;
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") finish();
       else if (event.key === "Tab") event.preventDefault();
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, finish]);
 
   // Fade concluído: a camada sai do DOM.
   useEffect(() => {
     if (phase !== "leaving") return;
-    const timer = window.setTimeout(() => setOverride("done"), FADE_MS);
+    const timer = window.setTimeout(() => setPhase("done"), FADE_MS);
     return () => window.clearTimeout(timer);
   }, [phase]);
 
   if (phase === "done") return null;
 
   return (
+    <>
+    {/* Sem JavaScript a vinheta não toca nem se fecha: esconde a camada para não bloquear a home. */}
+    <noscript>
+      <style>{`section[aria-label="Abertura da MyCod"]{display:none}`}</style>
+    </noscript>
     <section
       aria-label="Abertura da MyCod"
-      className={`fixed inset-0 z-[70] flex items-center justify-center ease-out ${
+      className={`fixed inset-0 z-[70] flex items-center justify-center ease-out motion-reduce:hidden ${
         phase === "leaving" ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
       style={{
@@ -148,12 +158,6 @@ export function MycodIntro() {
         preload="auto"
         onPlaying={() => {
           startedRef.current = true;
-          setOverride((current) => current ?? "playing");
-          try {
-            window.localStorage.setItem(STORAGE_KEY, "1");
-          } catch {
-            // Sem armazenamento, a vinheta pode voltar. Não é fatal.
-          }
         }}
         onEnded={finish}
         onError={finish}
@@ -166,5 +170,6 @@ export function MycodIntro() {
         }}
       />
     </section>
+    </>
   );
 }

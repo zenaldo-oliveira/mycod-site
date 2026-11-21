@@ -115,6 +115,11 @@ export const headingText = (page: Page, selector = "h1") =>
 export async function skipIntro(page: Page) {
   const intro = page.locator('section[aria-label="Abertura da MyCod"]');
   if (await intro.isVisible()) {
+    // A camada já vem no HTML do servidor; o Esc só age após a hidratação, que
+    // começa a reprodução. Espera o vídeo andar antes de apertar a tecla.
+    await page
+      .waitForFunction(() => (document.querySelector("section[aria-label='Abertura da MyCod'] video") as HTMLVideoElement | null)?.currentTime ?? 0 > 0, undefined, { timeout: 8_000 })
+      .catch(() => {});
     // Esc é o atalho de "Pular abertura" e não move o ponteiro, para que
     // os testes de interação com o mouse continuem começando do zero.
     await page.keyboard.press("Escape");

@@ -2,10 +2,10 @@ import { expect, test } from "@playwright/test";
 import type { BrowserContext, Page } from "@playwright/test";
 import { BASE, createCheck, finish, newPage } from "./support/helpers";
 
-// Abertura MyCod sobre a home: só a vinheta, sem controles nem textos. Exibida
-// uma vez por navegador (localStorage). Os testes gerais da home pulam a
-// abertura pela interface (skipIntro); aqui ela é validada do jeito que o
-// visitante a vê.
+// Abertura MyCod sobre a home: só a vinheta, sem controles nem textos. Toca a
+// cada carregamento completo da página, sem localStorage. Os testes gerais da
+// home pulam a abertura pela interface (skipIntro); aqui ela é validada do
+// jeito que o visitante a vê.
 
 const INTRO = 'section[aria-label="Abertura da MyCod"]';
 const VIEWPORTS = [
@@ -42,6 +42,12 @@ async function videoState(page: Page) {
   });
 }
 
+// A camada já vem no HTML; as teclas só funcionam depois da hidratação, que
+// começa a reprodução. Espera o vídeo andar antes de interagir.
+async function waitForIntroPlaying(page: Page) {
+  await expect.poll(async () => (await videoState(page))?.t ?? 0, { timeout: 8000 }).toBeGreaterThan(0);
+}
+
 async function introHidden(page: Page, timeout = 9000) {
   await expect(page.locator(INTRO)).toHaveCount(0, { timeout });
 }
@@ -53,6 +59,7 @@ for (const vp of VIEWPORTS) {
       const check = createCheck();
       await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
       await expect(page.locator(INTRO)).toBeVisible();
+      await waitForIntroPlaying(page);
 
       const state = await videoState(page);
       check("vídeo da MyCod carregado", state?.src.endsWith("/brand/MyCod-vinheta.mp4"), state?.src);
@@ -84,25 +91,26 @@ for (const vp of VIEWPORTS) {
       await context.close();
     });
 
-    test("depois da primeira exibição, recarregar, outra aba e voltar mais tarde abrem a home direto", async ({ browser }) => {
+    test("cada recarregamento e cada aba mostram a abertura de novo, sem bloqueio por navegador", async ({ browser }) => {
       const { context, page } = await newPage(browser, vp.width, { height: vp.height });
       await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
       await expect(page.locator(INTRO)).toBeVisible();
+      await waitForIntroPlaying(page);
       await page.keyboard.press("Escape");
       await introHidden(page, 2000);
 
+      // Recarregar na mesma aba: a vinheta volta.
       await page.reload({ waitUntil: "domcontentloaded" });
-      await expect(page.locator(INTRO)).toHaveCount(0);
+      await expect(page.locator(INTRO)).toBeVisible();
+      await waitForIntroPlaying(page);
+      await page.keyboard.press("Escape");
+      await introHidden(page, 2000);
 
+      // Outra aba do mesmo navegador: também toca.
       const other = await context.newPage();
       await other.goto(BASE + "/", { waitUntil: "domcontentloaded" });
-      await expect(other.locator(INTRO)).toHaveCount(0);
+      await expect(other.locator(INTRO)).toBeVisible();
       await other.close();
-
-      // Retorno posterior: a flag fica no localStorage. Não simulamos a passagem
-      // de um dia; o teste cobre a persistência, não o calendário.
-      await page.reload({ waitUntil: "domcontentloaded" });
-      await expect(page.locator(INTRO)).toHaveCount(0);
       await context.close();
     });
 
@@ -122,6 +130,7 @@ for (const vp of VIEWPORTS) {
       const { context, page } = await newPage(browser, vp.width, { height: vp.height });
       await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
       await expect(page.locator(INTRO)).toBeVisible();
+      await waitForIntroPlaying(page);
       await page.keyboard.press("Escape");
       await introHidden(page, 2000);
       await context.close();
@@ -131,6 +140,7 @@ for (const vp of VIEWPORTS) {
       const { context, page } = await newPage(browser, vp.width, { height: vp.height });
       await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
       await expect(page.locator(INTRO)).toBeVisible();
+      await waitForIntroPlaying(page);
       for (let i = 0; i < 3; i++) {
         await page.keyboard.press("Tab");
         const leaked = await page.evaluate(() => {
@@ -154,6 +164,7 @@ for (const vp of VIEWPORTS) {
   const { context, page } = await newPage(browser, vp.width, { height: vp.height });
   await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
   await expect(page.locator(INTRO)).toBeVisible();
+  await waitForIntroPlaying(page);
   await page.keyboard.press("Escape");
   await introHidden(page, 2000);
   // Não clicamos: o link abre o WhatsApp em nova aba. Conferimos destino e visibilidade.
