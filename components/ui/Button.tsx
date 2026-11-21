@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 // "inverse": botão claro para superfícies de marca (gradiente roxo do Hero).
-type ButtonVariant = "primary" | "inverse" | "secondary" | "link";
+// "onBrand": contorno claro para o gradiente roxo do Hero, nos dois temas.
+type ButtonVariant = "primary" | "inverse" | "secondary" | "onBrand" | "link";
 type ButtonSize = "sm" | "md";
 
 type ButtonProps = {
@@ -25,6 +26,8 @@ const VARIANTS: Record<ButtonVariant, string> = {
   inverse: "bg-white text-brand-deep hover:bg-brand-lavender",
   secondary:
     "border border-border bg-surface text-text-primary hover:border-border-strong hover:bg-surface-strong",
+  onBrand:
+    "border border-white/45 bg-white/10 text-white hover:border-white hover:bg-white/20",
   link: "rounded-md text-accent hover:text-text-primary",
 };
 

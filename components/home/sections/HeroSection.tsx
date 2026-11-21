@@ -60,7 +60,7 @@ export function HeroSection() {
               />
 
               {/* Opção secundária: o configurador continua acessível em /build. */}
-              <Button href="/build" variant="secondary" className="h-12 w-full whitespace-nowrap sm:w-auto">
+              <Button href="/build" variant="onBrand" className="h-12 w-full whitespace-nowrap sm:w-auto">
                 {hero.ctaConfigurator}
               </Button>
             </div>

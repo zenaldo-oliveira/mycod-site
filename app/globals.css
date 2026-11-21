@@ -610,3 +610,28 @@ body {
   --border: rgba(255, 255, 255, 0.18);
   --border-strong: rgba(255, 255, 255, 0.32);
 }
+
+/* Painéis dentro do hero roxo: .brand-hero fixa o texto em branco para o copy
+   sobre o gradiente. Aqui os tokens voltam aos do tema (escuro ou claro), para
+   o cartão de demonstração continuar legível nos dois temas. */
+.hero-panel {
+  --background: #120c1f;
+  --surface: #1b1330;
+  --surface-strong: #261a45;
+  --border: rgba(185, 163, 240, 0.14);
+  --border-strong: rgba(185, 163, 240, 0.28);
+  --text-primary: #f5f3fa;
+  --text-secondary: #cfc5e3;
+  --text-muted: #b3a7cc;
+}
+
+[data-theme="light"] .hero-panel {
+  --background: #f7f4fc;
+  --surface: #ffffff;
+  --surface-strong: #efeaf8;
+  --border: #e2dcef;
+  --border-strong: #cbc1e0;
+  --text-primary: #211733;
+  --text-secondary: #4a3d66;
+  --text-muted: #5e5079;
+}

@@ -165,7 +165,7 @@ export function HeroShowcase() {
   ];
 
   return (
-    <figure className="relative overflow-hidden rounded-2xl border border-border-strong bg-surface p-4 shadow-2xl shadow-black/30 sm:p-6">
+    <figure className="hero-panel relative overflow-hidden rounded-2xl border border-border-strong bg-surface p-4 shadow-2xl shadow-black/30 sm:p-6">
       {/* Gradiente pontual: um único brilho violeta de IA no canto. */}
       <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-ai/10 blur-3xl" />
       <div className="relative flex items-center justify-between gap-3">
