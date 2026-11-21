@@ -41,7 +41,7 @@ export function ContactContent() {
             <Reveal className="space-y-6">
               <div className="rounded-2xl border border-border-accent bg-surface p-6 sm:p-8">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#25D366]/15 text-[#25D366]">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-whatsapp/15 text-whatsapp">
                     <MessageCircle size={18} strokeWidth={2} aria-hidden="true" />
                   </span>
                   <h2 className="text-lg font-semibold tracking-tight text-text-primary">{c.channelsTitle}</h2>

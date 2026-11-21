@@ -389,7 +389,7 @@ export function SummaryStep({
         target="_blank"
         rel="noopener noreferrer"
         aria-describedby="builder-send-hint"
-        className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-cta px-5 text-sm font-semibold text-white transition-colors hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-auto"
+        className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-cta px-5 text-sm font-semibold text-background transition-colors hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-auto"
       >
         <MessageCircle size={16} aria-hidden="true" />
         {b.send}

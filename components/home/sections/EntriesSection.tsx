@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Check, Plus, Wrench } from "lucide-react";
 import { OfferImage } from "@/components/commercial/OffersSection";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/Container";
 import { RevealItem, RevealStagger } from "@/components/ui/Reveal";
 import { Section, SectionHeader } from "@/components/ui/Section";
@@ -25,7 +26,8 @@ function EntryCard({ entry }: { entry: HomeEntryDef }) {
   const resources = getEntryResources(entry).slice(0, MAX_RESOURCES);
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-border-accent hover:shadow-xl hover:shadow-black/15 focus-within:border-border-accent motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+    <Card className="group h-full">
+      {/* Sem elevação no hover: o movimento fica só no CTA, que responde à ação. */}
       {image && <OfferImage offer={image} alt={copy.imageAlt} />}
 
       <div className="flex flex-1 flex-col p-6">
@@ -36,7 +38,18 @@ function EntryCard({ entry }: { entry: HomeEntryDef }) {
         <h3 className="mt-3 text-xl font-semibold tracking-tight text-text-primary">{copy.name}</h3>
         <p className="mt-2 text-pretty text-sm leading-relaxed text-text-secondary">{copy.benefit}</p>
 
-        <p className="mt-5 font-mono text-[11px] uppercase tracking-wider text-text-muted">{e.resourcesLabel}</p>
+        <dl className="mt-5 space-y-3 rounded-xl bg-background/50 p-4 text-sm leading-relaxed">
+          <div>
+            <dt className="font-medium text-text-primary">{e.problemLabel}</dt>
+            <dd className="mt-0.5 text-text-secondary">{copy.problem}</dd>
+          </div>
+          <div>
+            <dt className="font-medium text-text-primary">{e.exampleLabel}</dt>
+            <dd className="mt-0.5 text-text-secondary">{copy.example}</dd>
+          </div>
+        </dl>
+
+        <p className="mt-5 text-sm font-medium text-text-primary">{e.resourcesLabel}</p>
         <ul className="mt-2.5 space-y-2">
           {resources.map((resource) => (
             <li key={resource.id} className="flex gap-2 text-sm leading-snug text-text-secondary">
@@ -63,7 +76,7 @@ function EntryCard({ entry }: { entry: HomeEntryDef }) {
           </Link>
         </div>
       </div>
-    </article>
+    </Card>
   );
 }
 

@@ -264,7 +264,7 @@ test("menu ⋮ (desktop): teclado, Esc, clique fora, Tab, idioma e tema", async 
   await page.click('[role="menuitemradio"]:has-text("Escuro")');
   await settle(page, 250);
   const dark = await page.evaluate(() => ({ attr: document.documentElement.dataset.theme, bg: getComputedStyle(document.body).backgroundColor }));
-  check("tema Escuro restaurado", dark.attr === "dark" && dark.bg === "rgb(8, 12, 20)", dark); // --background do tema escuro (#080c14)
+  check("tema Escuro restaurado", dark.attr === "dark" && dark.bg === "rgb(11, 17, 32)", dark); // --background do tema escuro (#0b1120)
   check("menu ⋮ sem erros de console", errors.length === 0, errors.slice(0, 2).join(" | "));
 
   await context.close();
@@ -401,7 +401,7 @@ test("âncoras da Home ficam abaixo da Top Bar", async ({ browser }) => {
   const check = createCheck();
   const { context, page } = await newPage(browser, 1440);
   await page.goto(BASE + "/", { waitUntil: "networkidle" });
-  for (const id of ["entradas", "exemplos", "entrega", "processo", "contato"]) {
+  for (const id of ["entradas", "exemplos", "processo", "duvidas", "contato"]) {
     await page.evaluate((i) => (location.hash = i), id);
     await settle(page, 300);
     const top = await page.evaluate((i) => Math.round(document.getElementById(i)!.getBoundingClientRect().top), id);

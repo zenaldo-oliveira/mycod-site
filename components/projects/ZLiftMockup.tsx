@@ -117,7 +117,7 @@ export function ZLiftMockup() {
             <div className="flex items-center justify-between gap-2">
               <p className="truncate text-xs font-semibold text-text-primary sm:text-sm">{m.ordersTitle}</p>
               <motion.span
-                className="inline-flex shrink-0 items-center gap-1 rounded-md bg-cta px-2 py-1 text-[10px] font-medium text-white"
+                className="inline-flex shrink-0 items-center gap-1 rounded-md bg-cta px-2 py-1 text-[10px] font-medium text-background"
                 animate={{ scale: [1, 0.92, 1] }}
                 transition={{ duration: 0.3, delay: 1.5 }}
               >

@@ -20,7 +20,7 @@ const BASE =
   "group inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  primary: "bg-cta text-white hover:bg-cta-hover",
+  primary: "bg-cta text-background hover:bg-cta-hover",
   secondary:
     "border border-border bg-surface text-text-primary hover:border-border-strong hover:bg-surface-strong",
   link: "rounded-md text-accent hover:text-text-primary",

@@ -9,7 +9,7 @@ import { BASE, PROJECT_TITLES, WA_EXISTING_SITE, WA_OFFICIAL, createCheck, finis
 
 // H1 esperado de cada rota (idioma padrão: PT).
 const ROUTES: Record<string, string> = {
-  "/": "Sites para apresentar sua empresa. Sistemas para facilitar sua operação.",
+  "/": "Sites, sistemas e automações para empresas de serviços",
   "/services": "Soluções para vender mais e organizar a operação.",
   "/plans": "Escolha o site ou sistema que sua empresa precisa.",
   "/build": "Monte seu projeto em poucos passos.",

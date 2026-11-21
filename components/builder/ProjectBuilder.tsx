@@ -185,7 +185,7 @@ export function ProjectBuilder() {
             <button
               type="button"
               onClick={handleNext}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-cta px-5 text-sm font-medium text-white transition-colors hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-cta px-5 text-sm font-medium text-background transition-colors hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {b.next}
               <ArrowRight size={16} aria-hidden="true" />

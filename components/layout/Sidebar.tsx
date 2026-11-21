@@ -211,7 +211,7 @@ function QuoteLink({ label, isActive, onNavigate }: { label: string; isActive: b
         href={QUOTE_NAV.href}
         aria-current={isActive ? "page" : undefined}
         onClick={onNavigate}
-        className="flex h-10 items-center justify-center gap-2 rounded-md bg-cta px-3 text-sm font-semibold text-white transition-colors duration-150 hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-[current=page]:ring-2 aria-[current=page]:ring-accent/60 lg:sidebar-collapsed:px-0"
+        className="flex h-10 items-center justify-center gap-2 rounded-md bg-cta px-3 text-sm font-semibold text-background transition-colors duration-150 hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-[current=page]:ring-2 aria-[current=page]:ring-accent/60 lg:sidebar-collapsed:px-0"
       >
         <ClipboardList size={16} strokeWidth={2} aria-hidden="true" className="shrink-0" />
         <span className="truncate lg:sidebar-collapsed:sr-only">{label}</span>

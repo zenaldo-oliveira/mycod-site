@@ -69,7 +69,7 @@ function CatalogMockup() {
           </div>
         ))}
       </div>
-      <div className="mx-3 mb-3 flex h-6 items-center justify-center gap-1.5 rounded-md bg-[#25D366]/90 text-white">
+      <div className="mx-3 mb-3 flex h-6 items-center justify-center gap-1.5 rounded-md bg-whatsapp/90 text-background">
         <MessageCircle size={11} />
         <span className="h-1 w-10 rounded-full bg-white/70" />
       </div>

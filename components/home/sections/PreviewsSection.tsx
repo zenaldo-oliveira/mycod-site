@@ -35,7 +35,7 @@ function PreviewPanel({ media, copy }: { media: ReactNode; copy: PanelCopy }) {
     <div className="grid items-center gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-12">
       <div className="group overflow-hidden rounded-2xl border border-border-strong bg-surface shadow-2xl shadow-black/20">{media}</div>
       <div>
-        <p className="font-mono text-[11px] uppercase tracking-wider text-accent">{copy.label}</p>
+        <p className="text-sm font-medium text-accent">{copy.label}</p>
         <h3 className="mt-3 text-2xl font-semibold tracking-tight text-text-primary sm:text-3xl">{copy.title}</h3>
         <p className="mt-3 text-pretty leading-relaxed text-text-secondary">{copy.description}</p>
         <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">

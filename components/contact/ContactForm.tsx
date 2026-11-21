@@ -216,7 +216,7 @@ export function ContactForm() {
             href={buildContactWhatsAppUrl({ name, whatsapp, email, message })}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#25D366]/60 px-4 py-3 text-sm font-semibold text-text-primary transition-colors duration-200 hover:bg-[#25D366]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-whatsapp/60 px-4 py-3 text-sm font-semibold text-text-primary transition-colors duration-200 hover:bg-whatsapp/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <MessageCircle size={16} aria-hidden="true" />
             {t.contactForm.sendViaWhatsapp}
@@ -241,7 +241,7 @@ export function ContactForm() {
               justify-center
               gap-2
               rounded-xl
-              bg-[#25D366]
+              bg-whatsapp
               px-4
               py-3
               text-sm
@@ -277,7 +277,7 @@ export function ContactForm() {
             py-3
             text-sm
             font-semibold
-            text-white
+            text-background
             transition-all
             duration-300
             hover:scale-[1.01]

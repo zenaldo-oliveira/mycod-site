@@ -59,14 +59,62 @@ export const pt: Dictionary = {
     hero: {
       eyebrow: "Tecnologia para pequenas e médias empresas",
 
-      title:
-        "Sites para apresentar sua empresa. Sistemas para facilitar sua operação.",
+      title: "Sites, sistemas e automações para empresas de serviços",
 
       description:
-        "Desenvolvemos sites, sistemas e automações para o seu negócio. Antes de contratar, você recebe uma proposta com escopo, prazo e valores definidos.",
+        "Criamos sites para apresentar seus serviços, sistemas para organizar sua rotina e automações com IA para agilizar o atendimento.",
 
       ctaPrimary: "Solicitar proposta",
       ctaSecondary: "Ver projetos reais",
+      ctaQuote: "Solicitar orçamento",
+      ctaWhatsApp: "Pedir orçamento pelo WhatsApp",
+      ctaConfigurator: "Montar projeto no configurador",
+      assurance: "Antes de contratar, você recebe uma proposta com escopo, prazo e valores definidos.",
+      showcase: {
+        caption: "Demonstração com dados fictícios",
+        tablistLabel: "Exemplos de demonstração",
+        tabs: { sites: "Sites", systems: "Sistemas", ai: "IA" },
+        sites: {
+          situation: "Um cliente pede orçamento pelo site",
+          formTitle: "Novo pedido de orçamento",
+          client: "Mariana Costa",
+          service: "Limpeza de ar-condicionado",
+          place: "Cuiabá · Centro",
+          channel: "Recebido pelo site",
+          labels: { name: "Nome", service: "Serviço", place: "Local" },
+          action: "Responder no WhatsApp",
+        },
+        systems: {
+          situation: "O pedido entra no painel da equipe",
+          columns: { new: "Novos", progress: "Em atendimento", done: "Concluídos" },
+          title: "Pedidos",
+          orders: [
+            { id: "#1038", client: "Oficina Exemplo", service: "Revisão do sistema" },
+            { id: "#1041", client: "Carlos Lima", service: "Manutenção preventiva" },
+          ],
+          incoming: { id: "#1042", client: "Mariana Costa", service: "Limpeza de ar-condicionado" },
+          tag: "Entrou agora",
+        },
+        ai: {
+          situation: "A automação atende a conversa e registra o pedido",
+          client: "Mariana Costa",
+          question: "Vocês fazem limpeza de ar-condicionado? Quanto custa?",
+          answer: "Fazemos sim! Quantos aparelhos são? Vou registrar seu pedido e a equipe confirma o valor.",
+          tag: "Pedido registrado no painel",
+          botName: "Automação ZTech",
+        },
+      },
+      services: [
+        { name: "Sites", benefit: "Páginas para apresentar seus serviços e receber pedidos." },
+        { name: "Sistemas sob medida", benefit: "Organize pedidos, agenda e cadastros em um lugar só." },
+        { name: "Automações com IA", benefit: "Respostas e pedidos organizados sem trabalho manual." },
+      ],
+      chat: {
+        header: "ZTech Solutions",
+        outgoing: "Olá! Vim pelo site da ZTech Solutions e gostaria de pedir um orçamento para o meu negócio. Pode me ajudar?",
+        outgoingMeta: "mensagem preenchida",
+        reply: "Olá! Obrigado por entrar em contato. Me conte qual serviço você precisa.",
+      },
 
       mockup: {
         caption: "Interface conceitual · ZLift Manager",

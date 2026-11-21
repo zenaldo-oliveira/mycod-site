@@ -65,6 +65,27 @@ export type Dictionary = {
       description: string;
       ctaPrimary: string;
       ctaSecondary: string;
+      ctaQuote: string;
+      ctaWhatsApp: string;
+      ctaConfigurator: string;
+      assurance: string;
+      services: { name: string; benefit: string }[];
+      chat: { header: string; outgoing: string; outgoingMeta: string; reply: string };
+      showcase: {
+        caption: string;
+        tablistLabel: string;
+        tabs: { sites: string; systems: string; ai: string };
+        sites: { situation: string; formTitle: string; client: string; service: string; place: string; channel: string; action: string; labels: { name: string; service: string; place: string } };
+        systems: {
+          situation: string;
+          columns: { new: string; progress: string; done: string };
+          title: string;
+          orders: { id: string; client: string; service: string }[];
+          incoming: { id: string; client: string; service: string };
+          tag: string;
+        };
+        ai: { situation: string; client: string; question: string; answer: string; tag: string; botName: string };
+      };
       mockup: {
         caption: string;
         modules: string[];

@@ -268,7 +268,9 @@ export type CommercialCopy = {
       title: string;
       description: string;
       resourcesLabel: string;
-      items: Record<HomeEntryId, { name: string; benefit: string; cta: string; imageAlt: string }>;
+      problemLabel: string;
+      exampleLabel: string;
+      items: Record<HomeEntryId, { name: string; benefit: string; problem: string; example: string; cta: string; imageAlt: string }>;
     };
     // Prévias em abas (Home): projetos reais e um protótipo identificado.
     previews: {

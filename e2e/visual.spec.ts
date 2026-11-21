@@ -69,14 +69,15 @@ for (const theme of ["dark", "light"] as const) {
         const fg = probe(token(tk));
         out[tk] = { background: contrast(fg, bg, bg), surface: contrast(fg, surface, bg), surfaceStrong: contrast(fg, strong, bg) };
       }
-      return { tokens: out, ctaWhite: contrast("rgb(255, 255, 255)", probe(token("--cta")), bg) };
+      return { tokens: out, ctaText: contrast(probe(token("--background")), probe(token("--cta")), bg) };
     });
     const min = (o: { background: number; surface: number; surfaceStrong: number }) => Math.min(o.background, o.surface, o.surfaceStrong);
     check(`${theme}: texto principal ≥ 7:1`, min(c.tokens["--text-primary"]) >= 7, c.tokens["--text-primary"]);
     check(`${theme}: texto secundário ≥ 4.5:1`, min(c.tokens["--text-secondary"]) >= 4.5, c.tokens["--text-secondary"]);
     check(`${theme}: texto muted ≥ 4.5:1`, min(c.tokens["--text-muted"]) >= 4.5, c.tokens["--text-muted"]);
     check(`${theme}: accent ≥ 4.5:1`, min(c.tokens["--accent"]) >= 4.5, c.tokens["--accent"]);
-    check(`${theme}: branco sobre CTA ≥ 4.5:1`, c.ctaWhite >= 4.5, c.ctaWhite);
+    // Ações: texto da cor de fundo do tema sobre o azul do CTA (texto escuro no tema dark).
+    check(`${theme}: texto sobre CTA ≥ 4.5:1`, c.ctaText >= 4.5, c.ctaText);
 
     // Top Bar: transparente no topo, vidro após rolar
     const headerStyle = () =>

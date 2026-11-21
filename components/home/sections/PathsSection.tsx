@@ -4,10 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Globe, Sparkles, UserRound } from "lucide-react";
 import { WhatsAppCta } from "@/components/contact/WhatsAppCta";
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { RevealItem, RevealStagger } from "@/components/ui/Reveal";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { StarBorder } from "@/components/ui/StarBorder";
+import { buildWhatsAppUrl } from "@/lib/contact/whatsapp";
 import { useTranslations } from "@/lib/i18n/LanguageContext";
 
 // Fechamento com dois caminhos: criar um projeto (configurador, StarBorder)
@@ -36,11 +38,16 @@ export function PathsSection() {
             </span>
             <h3 className="relative mt-6 text-2xl font-semibold tracking-tight text-text-primary sm:text-3xl">{p.create.title}</h3>
             <p className="relative mt-3 max-w-md text-pretty leading-relaxed text-text-secondary">{p.create.description}</p>
-            <div className="relative mt-auto pt-8">
-              <StarBorder href="/build">
-                {p.create.cta}
+            {/* Ação principal: WhatsApp oficial (configuração central). O
+                configurador fica como opção secundária. */}
+            <div className="relative mt-auto flex flex-col items-start gap-4 pt-8">
+              <StarBorder href={buildWhatsAppUrl()} external className="w-full sm:w-auto">
+                {t.home.hero.ctaWhatsApp}
                 <ArrowRight size={16} aria-hidden="true" />
               </StarBorder>
+              <Button href="/build" variant="secondary" className="h-10 w-full whitespace-nowrap sm:w-auto">
+                {t.home.hero.ctaConfigurator}
+              </Button>
             </div>
           </RevealItem>
 

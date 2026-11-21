@@ -61,7 +61,7 @@ export function AgendaMockup() {
             ))}
           </div>
         </div>
-        <span className="flex h-6 items-center justify-center rounded-md bg-cta text-[10px] font-semibold text-white">{m.confirm}</span>
+        <span className="flex h-6 items-center justify-center rounded-md bg-cta text-[10px] font-semibold text-background">{m.confirm}</span>
       </div>
     </div>
   );
