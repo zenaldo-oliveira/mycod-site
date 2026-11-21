@@ -3,15 +3,17 @@ import type { Page } from "@playwright/test";
 import { BASE, PROJECT_TITLES, createCheck, finish, newContext } from "./support/helpers";
 
 // Carrossel de /projects (Embla): slide central, vizinhos, setas, loop,
-// indicadores, teclado, arraste, links reais preservados e reduced motion.
+// indicadores, teclado, arraste, links ocultos até confirmação e reduced motion.
 
 // Projetos reais cadastrados (PROJECT_TITLES, na ordem de
 // lib/projects/data.ts); o rótulo de cada slide é "N de TOTAL: título".
 const TOTAL = PROJECT_TITLES.length;
 const slideLabel = (n: number) => `${n} de ${TOTAL}: ${PROJECT_TITLES[n - 1]}`;
 
-// Links reais de lib/projects/data.ts — devem continuar todos lá, sem extras.
-// (Os CTAs de WhatsApp dos cards são verificados em pages.spec.ts.)
+// Links de lib/projects/data.ts. Nenhum está confirmado como publicado nesta
+// revisão (linksConfirmed ausente), então o card não os exibe: o teste
+// garante que nenhum aparece até a confirmação. (Os CTAs de WhatsApp dos cards
+// são verificados em pages.spec.ts.)
 const EXPECTED_LINKS = [
   "https://expo.dev/accounts/zenaldo/projects/Dieta-mobile/builds/95262f1b-a2c4-4227-8709-fa5574c90d8d",
   "https://github.com/zenaldo-oliveira/dietaapp-mobile",
@@ -150,9 +152,8 @@ for (const width of [1440, 1280, 1024, 768, 390, 360]) {
       })),
     );
     const hrefs = [...new Set(links.map((l) => l.href))];
-    const missing = EXPECTED_LINKS.filter((u) => !hrefs.includes(u));
-    const extra = hrefs.filter((u) => !EXPECTED_LINKS.includes(u));
-    check(`${width}px todos os links reais presentes (sem extras)`, missing.length === 0 && extra.length === 0, { missing, extra });
+    const shown = hrefs.filter((u) => EXPECTED_LINKS.includes(u));
+    check(`${width}px links não confirmados ficam ocultos`, shown.length === 0, { shown });
     check(`${width}px links com _blank + noopener`, links.every((l) => l.target === "_blank" && l.rel.includes("noopener")));
     check(`${width}px sem erros de console`, errors.length === 0, errors.slice(0, 2));
 

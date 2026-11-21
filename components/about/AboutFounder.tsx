@@ -22,7 +22,7 @@ export function AboutFounder() {
     <Section id="fundador">
       <Container className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <Reveal>
-          <AboutProfilePhoto name={FOUNDER_NAME} role={f.role} />
+          <AboutProfilePhoto name={FOUNDER_NAME} role={f.role} alt={`${FOUNDER_NAME}, fundador da MyCod`} />
         </Reveal>
 
         <Reveal delay={0.1}>

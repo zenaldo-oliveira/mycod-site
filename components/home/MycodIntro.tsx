@@ -50,15 +50,43 @@ export function MycodIntro() {
   }, []);
 
   // Começa com som; se o navegador bloquear, volta ao mudo. Sem aviso, sem botão.
+  // Se tiver começado no mudo, o primeiro toque ou tecla do visitante durante
+  // a abertura libera o áudio: navegadores só permitem som após um gesto.
   useEffect(() => {
     if (phase !== "playing") return;
     const video = videoRef.current;
     if (!video) return;
+    let unlock: (() => void) | null = null;
+
+    const removeUnlock = () => {
+      if (!unlock) return;
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+      window.removeEventListener("touchstart", unlock);
+      unlock = null;
+    };
+
     video.muted = false;
     video.play().catch(() => {
       video.muted = true;
-      video.play().catch(finish);
+      video.play().then(
+        () => {
+          unlock = () => {
+            removeUnlock();
+            video.muted = false;
+            video.play().catch(() => {
+              video.muted = true;
+            });
+          };
+          window.addEventListener("pointerdown", unlock);
+          window.addEventListener("keydown", unlock);
+          window.addEventListener("touchstart", unlock);
+        },
+        finish,
+      );
     });
+
+    return removeUnlock;
   }, [phase, finish]);
 
   // Demora para iniciar: libera a home.

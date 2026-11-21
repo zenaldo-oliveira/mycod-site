@@ -39,7 +39,7 @@ export function buildLeadNotificationMessage(lead: LeadNotificationData): string
   const lines = [
     statusMeta
       ? `${statusMeta.emoji} NOVO LEAD QUALIFICADO`
-      : "🚨 NOVO LEAD — PORTFÓLIO ZTECH",
+      : "🚨 NOVO LEAD — PORTFÓLIO MYCOD",
     "",
     `👤 Nome: ${lead.nome}`,
   ];

@@ -133,6 +133,24 @@ export type Dictionary = {
     cta: string;
     secondaryCta: string;
     capabilitiesTitle: string;
+    culture: {
+      eyebrow: string;
+      title: string;
+      description: string;
+      purposeLabel: string;
+      purpose: string;
+      missionLabel: string;
+      mission: string;
+      visionLabel: string;
+      vision: string;
+      valuesTitle: string;
+      howLabel: string;
+      values: { name: string; how: string }[];
+      openingLabel: string;
+      opening: string;
+      toneLabel: string;
+      tone: string;
+    };
     proof: {
       eyebrow: string;
       title: string;
@@ -170,6 +188,7 @@ export type Dictionary = {
     problemLabel: string;
     solutionLabel: string;
     demoLabel: string;
+    demonstrationBadge: string;
     githubLabel: string;
     // Textos alternativos das capturas reais ({title} = nome do projeto).
     media: {

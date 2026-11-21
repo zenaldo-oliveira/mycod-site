@@ -187,6 +187,45 @@ export const en: Dictionary = {
     cta: "Talk to MyCod",
     secondaryCta: "Explore cases",
     capabilitiesTitle: "What we build",
+    culture: {
+      eyebrow: "Culture",
+      title: "How MyCod thinks and works.",
+      description: "The purpose, mission and vision behind every project, and the values with examples of how we apply them day to day.",
+      purposeLabel: "Purpose",
+      purpose: "Help service businesses get found, serve customers better and save time with technology.",
+      missionLabel: "Mission",
+      mission: "Build websites, systems and automations that solve concrete problems, such as making quote requests easier, organizing bookings and reducing repetitive tasks.",
+      visionLabel: "Vision",
+      vision: "Build MyCod's reputation in Cuiabá and Várzea Grande through the quality of our deliveries, clear proposals and customer trust.",
+      valuesTitle: "Values and how we practice them",
+      howLabel: "How we practice it",
+      values: [
+        {
+          name: "Understand before building",
+          how: "We learn how the business works and where it loses time or opportunities.",
+        },
+        {
+          name: "Clear agreements",
+          how: "We record scope, timeline, investment and what is included after delivery. We talk before changing an agreement.",
+        },
+        {
+          name: "Simplicity for the user",
+          how: "We prioritize direct journeys, such as requesting a quote on WhatsApp from a phone.",
+        },
+        {
+          name: "Quality in delivery",
+          how: "We test the customer's full path and show the result at handover.",
+        },
+        {
+          name: "Care for the client's business",
+          how: "We protect access, ask permission before showcasing projects and guide the client on using the solution.",
+        },
+      ],
+      openingLabel: "How we start every project",
+      opening: "“What needs to get easier in your business once this project is live?”",
+      toneLabel: "Tone of voice",
+      tone: "Direct, professional and friendly. We describe what the customer will be able to do with the solution and agree on what will be delivered.",
+    },
     proof: {
       eyebrow: "Proof",
       title: "What we've already built",
@@ -238,6 +277,7 @@ export const en: Dictionary = {
     problemLabel: "Problem",
     solutionLabel: "Solution",
     demoLabel: "Demo",
+    demonstrationBadge: "Demonstration",
     githubLabel: "GitHub",
     media: {
       screenshotAlt: "Published home page of {title}",

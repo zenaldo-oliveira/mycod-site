@@ -49,6 +49,11 @@ export function ProjectCard({ project, copy, variant }: ProjectCardProps) {
             </span>
           )}
           <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{copy.category}</span>
+          {project.demonstration && (
+            <span className="rounded-full border border-border-strong px-2.5 py-0.5 text-xs text-text-secondary">
+              {t.projects.demonstrationBadge}
+            </span>
+          )}
         </div>
 
         <h3 className="mt-3 text-lg font-semibold tracking-tight text-text-primary">{project.title}</h3>
@@ -125,13 +130,17 @@ const LINK_CLASS = "min-w-fit grow-0 basis-[calc(50%-0.25rem)] whitespace-nowrap
 function DetailedActions({ project }: { project: Project }) {
   const t = useTranslations();
 
-  if (!project.demo && !project.github) return <SimilarCta />;
+  // Links só aparecem com `linksConfirmed`. Sem confirmação, o card mostra só o CTA de orçamento.
+  const demo = project.linksConfirmed ? project.demo : undefined;
+  const github = project.linksConfirmed ? project.github : undefined;
+
+  if (!demo && !github) return <SimilarCta />;
 
   return (
     <>
-      {project.demo && (
+      {demo && (
         <Button
-          href={project.demo}
+          href={demo}
           external
           variant="primary"
           size="sm"
@@ -142,9 +151,9 @@ function DetailedActions({ project }: { project: Project }) {
           {t.projects.demoLabel}
         </Button>
       )}
-      {project.github && (
+      {github && (
         <Button
-          href={project.github}
+          href={github}
           external
           variant="secondary"
           size="sm"

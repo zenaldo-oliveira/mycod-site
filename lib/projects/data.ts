@@ -24,12 +24,18 @@ export type ProjectMedia =
   | { kind: "screenshot"; src: StaticImageData }
   | { kind: "phone"; screens: readonly [StaticImageData, StaticImageData] };
 
+// `demonstration`: projeto de estudo ou exemplo, não um cliente real. Mostra o
+// selo "Demonstração" no card.
+// `linksConfirmed`: os links só aparecem quando este campo é `true`. Nenhum
+// link foi confirmado como publicado nesta revisão; ver PENDENCIAS-REDESIGN.md.
 export type Project = {
   title: string;
   technologies: string[];
   demo?: string;
   github?: string;
   featured: boolean;
+  demonstration?: boolean;
+  linksConfirmed?: boolean;
   media?: ProjectMedia;
 };
 
@@ -59,6 +65,7 @@ export const PROJECTS: Project[] = [
   {
     title: "Pet Shop Premium",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+    demonstration: true,
     demo: "https://petshop-zenaldo.netlify.app/",
     github: "https://github.com/zenaldo-oliveira/petshop-blad",
     featured: false,
@@ -67,6 +74,7 @@ export const PROJECTS: Project[] = [
   {
     title: "Barber Shop Premium",
     technologies: ["HTML", "SCSS", "JavaScript", "AOS"],
+    demonstration: true,
     demo: "https://barber-premium-site.netlify.app/",
     github: "https://github.com/zenaldo-oliveira/BARBER",
     featured: false,
@@ -75,6 +83,7 @@ export const PROJECTS: Project[] = [
   {
     title: "Text To Voice AI",
     technologies: ["HTML", "CSS", "JavaScript", "Web Speech API"],
+    demonstration: true,
     demo: "https://conversortxt.netlify.app/",
     github: "https://github.com/zenaldo-oliveira/Text-to-Voice",
     featured: false,
@@ -91,12 +100,14 @@ export const PROJECTS: Project[] = [
     title: "Cafeteria",
     technologies: [],
     featured: false,
+    demonstration: true,
     media: { kind: "screenshot", src: cafeteriaShot },
   },
   {
     title: "Turismo",
     technologies: [],
     featured: false,
+    demonstration: true,
     media: { kind: "screenshot", src: turismoShot },
   },
 ];

@@ -1,5 +1,6 @@
 "use client";
 
+import { AboutCulture } from "@/components/about/AboutCulture";
 import { AboutFounder } from "@/components/about/AboutFounder";
 import { AboutHero } from "@/components/about/AboutHero";
 import { AboutProof } from "@/components/about/AboutProof";
@@ -15,6 +16,9 @@ export function AboutContent() {
     <>
       {/* Apresentação da MyCod e do público que atende */}
       <AboutHero />
+
+      {/* Propósito, missão, visão e valores */}
+      <AboutCulture />
 
       {/* Quem está por trás da empresa */}
       <AboutFounder />

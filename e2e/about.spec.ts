@@ -8,7 +8,7 @@ import { BASE, WA_OFFICIAL, createCheck, finish, headingText, newPage, scrollThr
 
 // Ordem aprovada: apresentação → fundador → projetos reais → como funciona →
 // capacidade técnica → contratar.
-const ORDER = ["sobre", "fundador", "construimos", "processo", "tecnologias", "contato"];
+const ORDER = ["sobre", "cultura", "fundador", "construimos", "processo", "tecnologias", "contato"];
 const PROJECTS = ["ZLift Manager", "Dieta IA", "Pet Shop Premium", "Barber Shop Premium", "Text To Voice AI", "EasyCar Mobile"];
 
 async function openAbout(
@@ -52,7 +52,7 @@ for (const width of [1440, 1280, 1024, 768, 390, 360]) {
     });
     check(
       `${width}px foto do fundador 4:5, dentro da tela, com legenda`,
-      photo.alt === "Zenaldo Pereira de Oliveira" && photo.ratio === 0.8 && photo.left >= 0 && photo.right <= photo.vw && photo.caption.includes("Fundador"),
+      photo.alt === "Zenaldo Pereira de Oliveira, fundador da MyCod" && photo.ratio === 0.8 && photo.left >= 0 && photo.right <= photo.vw && photo.caption.includes("Fundador"),
       photo,
     );
 

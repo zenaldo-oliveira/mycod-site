@@ -188,6 +188,45 @@ export const es: Dictionary = {
     cta: "Hablar con MyCod",
     secondaryCta: "Explorar casos",
     capabilitiesTitle: "Lo que desarrollamos",
+    culture: {
+      eyebrow: "Cultura",
+      title: "Cómo piensa y trabaja MyCod.",
+      description: "El propósito, la misión y la visión que guían cada proyecto, y los valores con ejemplos de cómo los aplicamos día a día.",
+      purposeLabel: "Propósito",
+      purpose: "Ayudar a empresas de servicios a ser encontradas, atender mejor y ganar tiempo con tecnología.",
+      missionLabel: "Misión",
+      mission: "Crear sitios, sistemas y automatizaciones que resuelvan problemas concretos, como facilitar las solicitudes de presupuesto, organizar citas y reducir tareas repetitivas.",
+      visionLabel: "Visión",
+      vision: "Construir la reputación de MyCod en Cuiabá y Várzea Grande por la calidad de las entregas, la claridad en las propuestas y la confianza de los clientes.",
+      valuesTitle: "Valores y cómo los practicamos",
+      howLabel: "Cómo lo practicamos",
+      values: [
+        {
+          name: "Entender antes de construir",
+          how: "Descubrimos cómo funciona la empresa y dónde pierde tiempo u oportunidades.",
+        },
+        {
+          name: "Claridad en lo acordado",
+          how: "Registramos alcance, plazo, inversión y lo que incluye después de la entrega. Conversamos antes de cambiar lo acordado.",
+        },
+        {
+          name: "Simplicidad para quien usa",
+          how: "Priorizamos recorridos directos, como pedir presupuesto por WhatsApp desde el celular.",
+        },
+        {
+          name: "Calidad en la entrega",
+          how: "Probamos el recorrido completo del cliente y mostramos el resultado en la entrega.",
+        },
+        {
+          name: "Cuidado con el negocio del cliente",
+          how: "Protegemos los accesos, pedimos autorización para mostrar proyectos y orientamos al cliente sobre el uso de la solución.",
+        },
+      ],
+      openingLabel: "Cómo empezamos cada proyecto",
+      opening: "“¿Qué necesita ser más fácil en tu negocio cuando este proyecto esté en línea?”",
+      toneLabel: "Tono de voz",
+      tone: "Directo, profesional y cercano. Describimos lo que el cliente podrá hacer con la solución y acordamos lo que se entregará.",
+    },
     proof: {
       eyebrow: "Prueba",
       title: "Lo que ya construimos",
@@ -239,6 +278,7 @@ export const es: Dictionary = {
     problemLabel: "Problema",
     solutionLabel: "Solución",
     demoLabel: "Demo",
+    demonstrationBadge: "Demostración",
     githubLabel: "GitHub",
     media: {
       screenshotAlt: "Página de inicio publicada de {title}",

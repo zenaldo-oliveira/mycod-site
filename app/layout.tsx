@@ -2,7 +2,7 @@ import { FloatingWhatsapp } from "@/components/layout/FloatingWhatsapp";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageBackground } from "@/components/layout/PageBackground";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -15,14 +15,21 @@ import "./globals.css";
 // estático, sem dado do usuário.
 const PREFERENCES_INIT_SCRIPT = `(function(){try{var d=document.documentElement;var t=localStorage.getItem("theme");d.setAttribute("data-theme",t==="light"?"light":"dark");var s=localStorage.getItem("sidebar-collapsed");if(s==="collapsed"||s==="true")d.setAttribute("data-sidebar","collapsed");}catch(e){}})();`;
 
-const geistSans = Geist({
+// Geist self-hosted em app/fonts (latin, variável 100–900). Antes vinha do
+// Google Fonts via next/font/google; trocado para que o build não dependa de
+// fontes.googleapis.com. Para voltar, restaurar o next/font/google original.
+const geistSans = localFont({
+  src: "./fonts/geist-latin.woff2",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  weight: "100 900",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/geist-mono-latin.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "100 900",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
