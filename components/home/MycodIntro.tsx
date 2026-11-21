@@ -11,11 +11,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 // direto (ver a classe motion-reduce:hidden no marcado).
 
 const SRC = "/brand/MyCod-vinheta.mp4";
-// Cor das bordas do vídeo aprovado. A máscara de borda apaga o quadro sobre ela.
+// Cor de fundo da camada, enquanto o vídeo não ocupa a tela.
 const BACKGROUND = "#442c6a";
 const FADE_MS = 400;
 const START_TIMEOUT_MS = 3000;
-const MASK = "radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%)";
 
 type Phase = "playing" | "leaving" | "done";
 type Decision = "play" | "skip";
@@ -142,7 +141,7 @@ export function MycodIntro() {
     </noscript>
     <section
       aria-label="Abertura da MyCod"
-      className={`fixed inset-0 z-[70] flex items-center justify-center ease-out motion-reduce:hidden ${
+      className={`fixed inset-0 isolate z-[70] flex items-center justify-center overflow-hidden ease-out motion-reduce:hidden ${
         phase === "leaving" ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
       style={{
@@ -162,12 +161,19 @@ export function MycodIntro() {
         onEnded={finish}
         onError={finish}
         aria-hidden="true"
-        className="block h-auto max-w-none"
-        style={{
-          width: "min(100vw, calc(100dvh * 16 / 9))",
-          WebkitMaskImage: MASK,
-          maskImage: MASK,
-        }}
+        className="relative z-0 block h-full w-full object-cover portrait:h-auto portrait:aspect-[9/16] portrait:object-contain portrait:[mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)] portrait:[-webkit-mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)]"
+      />
+      {/* Fundo: cópia desfocada do mesmo vídeo, sem controles e sem eventos. Preenche
+          as faixas que o "contain" deixa, sem cortar os quadradinhos nem o monograma. */}
+      <video
+        src={SRC}
+        muted
+        autoPlay
+        playsInline
+        preload="auto"
+        tabIndex={-1}
+        aria-hidden="true"
+        className="absolute -inset-[25%] -z-10 h-[150%] w-[150%] max-w-none object-cover blur-2xl"
       />
     </section>
     </>
