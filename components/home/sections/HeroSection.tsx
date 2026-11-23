@@ -37,7 +37,8 @@ export function HeroSection() {
           <AnimatedH1
             {...fadeUp(0.05)}
             text={hero.title}
-            className="text-balance text-4xl font-semibold leading-[1.1] tracking-tight text-text-primary sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]"
+            wordRise
+            className="hero-word-rise text-balance text-4xl font-semibold leading-[1.1] tracking-tight text-text-primary sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]"
           />
 
           <motion.p

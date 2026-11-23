@@ -577,6 +577,38 @@ body {
   }
 }
 
+/* Título do Hero: cada palavra sobe em cascata uma única vez. Só desloca
+   (nunca oculta), então o título continua legível sem JavaScript. Vale tanto
+   para o texto puro quanto para as palavras do efeito de mouse. */
+.hero-word-rise [data-word] {
+  display: inline-block;
+  animation: hero-word-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-word-rise [data-word]:nth-child(1) { animation-delay: 0.05s; }
+.hero-word-rise [data-word]:nth-child(2) { animation-delay: 0.12s; }
+.hero-word-rise [data-word]:nth-child(3) { animation-delay: 0.19s; }
+.hero-word-rise [data-word]:nth-child(4) { animation-delay: 0.26s; }
+.hero-word-rise [data-word]:nth-child(5) { animation-delay: 0.33s; }
+.hero-word-rise [data-word]:nth-child(6) { animation-delay: 0.4s; }
+.hero-word-rise [data-word]:nth-child(7) { animation-delay: 0.47s; }
+.hero-word-rise [data-word]:nth-child(n + 8) { animation-delay: 0.54s; }
+
+@keyframes hero-word-rise {
+  from {
+    transform: translateY(0.35em);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-word-rise [data-word] {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
