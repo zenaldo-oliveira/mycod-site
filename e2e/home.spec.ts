@@ -120,20 +120,21 @@ test("Home: demonstração com três abas, troca por clique e por teclado", asyn
   finish(check);
 });
 
-test("Home: serviços com problema e exemplo, projetos, processo, dúvidas e orçamento", async ({ browser }) => {
+test("Home: vitrine de três ofertas, projetos, processo, dúvidas e orçamento", async ({ browser }) => {
   const check = createCheck();
   const { context, page, errors } = await openHome(browser, 1440);
   await scrollThrough(page, 500, 60);
 
+  // Vitrine de três ofertas: o plano por assinatura vem primeiro na leitura,
+  // com a condição de valor anual e um CTA de WhatsApp com mensagem própria.
   const cards = await page.evaluate(() =>
-    [...document.querySelectorAll("#entradas ul.grid > li")].map((li) => ({
+    [...document.querySelectorAll("#entradas ul > li")].map((li) => ({
       text: li.textContent ?? "",
-      hasProblem: li.textContent?.includes("Problema que resolve") ?? false,
-      hasExample: li.textContent?.includes("Exemplo") ?? false,
-      hasCta: !!li.querySelector("a[href]"),
+      hasCondition: li.textContent?.includes("Consultar valor anual") ?? false,
+      hasWhatsAppCta: [...li.querySelectorAll("a[href]")].some((a) => a.getAttribute("href")?.startsWith("https://wa.me")),
     })),
   );
-  check(`serviços: ${HOME_ENTRIES.length} cards com problema e exemplo`, cards.length === HOME_ENTRIES.length && cards.every((c) => c.hasProblem && c.hasExample && c.hasCta), cards);
+  check("serviços: 3 ofertas, plano por assinatura primeiro, cada uma com WhatsApp", cards.length === 3 && cards[0].text.includes("Site por Assinatura") && cards[0].hasCondition && cards.every((c) => c.hasWhatsAppCta), cards);
 
   const previewCount = await page.evaluate(() => document.querySelectorAll('#exemplos [role="tab"]').length);
   check("projetos: abas de exemplos", previewCount === HOME_PREVIEWS.length, previewCount);

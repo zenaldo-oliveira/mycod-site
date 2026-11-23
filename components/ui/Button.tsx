@@ -3,7 +3,8 @@ import type { ReactNode } from "react";
 
 // "inverse": botão claro para superfícies de marca (gradiente roxo do Hero).
 // "onBrand": contorno claro para o gradiente roxo do Hero, nos dois temas.
-type ButtonVariant = "primary" | "inverse" | "secondary" | "onBrand" | "link";
+// "gold": botão dourado preenchido, usado só no card em destaque da vitrine.
+type ButtonVariant = "primary" | "inverse" | "secondary" | "onBrand" | "link" | "gold";
 type ButtonSize = "sm" | "md";
 
 type ButtonProps = {
@@ -29,6 +30,7 @@ const VARIANTS: Record<ButtonVariant, string> = {
   onBrand:
     "border border-white/45 bg-white/10 text-white hover:border-white hover:bg-white/20",
   link: "rounded-md text-accent hover:text-text-primary",
+  gold: "bg-[#e7b84b] text-[#1b1330] hover:bg-[#f0c75e]",
 };
 
 const SIZES: Record<ButtonSize, string> = {

@@ -6,7 +6,7 @@ import type { Availability, FeatureId, Pricing, ServiceOfferDef, ServiceOfferId,
 // previews / receives), casados pelos ids abaixo; recursos, funcionalidades,
 // disponibilidade e preços vêm do catálogo (lib/catalog/data.ts).
 
-export type HomeEntryId = "landing" | "site" | "systems";
+export type HomeEntryId = "systems" | "site" | "automation";
 export type HomePreviewId = "landing" | "site" | "tool" | "app" | "prototype";
 
 export type HomeEntryDef = {
@@ -21,9 +21,9 @@ export type HomeEntryDef = {
 };
 
 export const HOME_ENTRIES: readonly HomeEntryDef[] = [
-  { id: "landing", offers: ["landing"], imageOffer: "landing", href: "/build?service=landing" },
+  { id: "systems", offers: ["custom-saas"], imageOffer: "custom-saas", href: "/build" },
   { id: "site", offers: ["business-site"], imageOffer: "business-site", href: "/build?service=business-site" },
-  { id: "systems", offers: ["automation-ai", "custom-saas"], imageOffer: "custom-saas", href: "/build" },
+  { id: "automation", offers: ["automation-ai"], imageOffer: "automation-ai", href: "/build" },
 ];
 
 // Prévias: projetos com captura real (títulos de lib/projects/data.ts) e um

@@ -7,7 +7,7 @@ type WhatsAppCtaProps = {
   // Mensagem pré-preenchida; sem ela, usa a mensagem padrão do site.
   message?: string;
   ariaLabel?: string;
-  variant?: "primary" | "inverse" | "secondary";
+  variant?: "primary" | "inverse" | "secondary" | "gold";
   size?: "sm" | "md";
   showArrow?: boolean;
   className?: string;

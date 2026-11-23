@@ -270,7 +270,7 @@ export type CommercialCopy = {
       resourcesLabel: string;
       problemLabel: string;
       exampleLabel: string;
-      items: Record<HomeEntryId, { name: string; benefit: string; problem: string; example: string; cta: string; imageAlt: string }>;
+      items: Record<HomeEntryId, { name: string; headline?: string; condition?: string; benefit: string; problem: string; example: string; cta: string; message: string; imageAlt: string }>;
     };
     // Prévias em abas (Home): projetos reais e um protótipo identificado.
     previews: {

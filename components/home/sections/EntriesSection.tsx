@@ -1,89 +1,64 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight, Check, Plus, Wrench } from "lucide-react";
-import { OfferImage } from "@/components/commercial/OffersSection";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { WhatsAppCta } from "@/components/contact/WhatsAppCta";
+import { RibbonBand } from "@/components/black-friday/RibbonBand";
+import styles from "@/components/black-friday/black-friday.module.css";
 import { Container } from "@/components/ui/Container";
 import { RevealItem, RevealStagger } from "@/components/ui/Reveal";
 import { Section, SectionHeader } from "@/components/ui/Section";
-import { getServiceOffer } from "@/lib/catalog/data";
-import { getEntryResources, HOME_ENTRIES, isEntryCustom } from "@/lib/catalog/home";
-import type { HomeEntryDef } from "@/lib/catalog/home";
+import type { HomeEntryId } from "@/lib/catalog/home";
 import { useTranslations } from "@/lib/i18n/LanguageContext";
 
-// Recursos exibidos por cartão (os já entregues vêm primeiro).
-const MAX_RESOURCES = 4;
+// Ordem de leitura e de teclado: o plano por assinatura vem primeiro, e assim
+// aparece no celular. No desktop, a classe `order` coloca sistemas à esquerda,
+// o plano no centro e automações à direita.
+const READING_ORDER: HomeEntryId[] = ["site", "systems", "automation"];
+const FEATURED: HomeEntryId = "site";
 
-function EntryCard({ entry }: { entry: HomeEntryDef }) {
-  const t = useTranslations();
-  const c = t.commercial;
-  const e = c.home.entries;
-  const copy = e.items[entry.id];
-  const isCustom = isEntryCustom(entry);
-  const image = getServiceOffer(entry.imageOffer);
-  const resources = getEntryResources(entry).slice(0, MAX_RESOURCES);
+const DESKTOP_ORDER: Record<HomeEntryId, string> = {
+  site: "order-1 lg:order-2",
+  systems: "order-2 lg:order-1",
+  automation: "order-3 lg:order-3",
+};
+
+function OfferCard({ id }: { id: HomeEntryId }) {
+  const copy = useTranslations().commercial.home.entries.items[id];
+  const featured = id === FEATURED;
 
   return (
-    <Card className="group h-full">
-      {/* Sem elevação no hover: o movimento fica só no CTA, que responde à ação. */}
-      {image && <OfferImage offer={image} alt={copy.imageAlt} />}
+    <div className={`${styles.card} ${featured ? styles.cardFeatured : ""} h-full`}>
+      <h3 className="text-xl font-semibold tracking-tight text-text-primary">{copy.name}</h3>
 
-      <div className="flex flex-1 flex-col p-6">
-        <Badge variant={isCustom ? "outline" : "default"}>
-          {isCustom && <Wrench size={11} aria-hidden="true" />}
-          {c.availability[isCustom ? "custom" : "available"].label}
-        </Badge>
-        <h3 className="mt-3 text-xl font-semibold tracking-tight text-text-primary">{copy.name}</h3>
-        <p className="mt-2 text-pretty text-sm leading-relaxed text-text-secondary">{copy.benefit}</p>
+      {copy.headline && (
+        <p className="text-lg font-semibold leading-snug text-text-primary">{copy.headline}</p>
+      )}
 
-        <dl className="mt-5 space-y-3 rounded-xl bg-background/50 p-4 text-sm leading-relaxed">
-          <div>
-            <dt className="font-medium text-text-primary">{e.problemLabel}</dt>
-            <dd className="mt-0.5 text-text-secondary">{copy.problem}</dd>
-          </div>
-          <div>
-            <dt className="font-medium text-text-primary">{e.exampleLabel}</dt>
-            <dd className="mt-0.5 text-text-secondary">{copy.example}</dd>
-          </div>
-        </dl>
+      <p className="text-pretty text-sm leading-relaxed text-text-secondary">{copy.benefit}</p>
 
-        <p className="mt-5 text-sm font-medium text-text-primary">{e.resourcesLabel}</p>
-        <ul className="mt-2.5 space-y-2">
-          {resources.map((resource) => (
-            <li key={resource.id} className="flex gap-2 text-sm leading-snug text-text-secondary">
-              {resource.implemented ? (
-                <Check size={15} aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
-              ) : (
-                <Plus size={15} aria-hidden="true" className="mt-0.5 shrink-0 text-text-muted" />
-              )}
-              <span>
-                {c.showcase.resources[resource.id]}
-                {!resource.implemented && <span className="text-text-muted"> · {c.showcase.customLabel}</span>}
-              </span>
-            </li>
-          ))}
-        </ul>
+      {copy.condition && (
+        <p className="rounded-lg border border-[#f0c75e]/60 px-3 py-2 text-sm font-medium text-[#f0c75e]">
+          {copy.condition}
+        </p>
+      )}
 
-        <div className="mt-auto pt-6">
-          <Link
-            href={entry.href}
-            className="flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-border bg-background/40 px-4 text-sm font-medium text-text-primary transition-[background-color,border-color,scale] duration-150 hover:border-border-accent hover:bg-surface-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] motion-reduce:active:scale-100"
-          >
-            {copy.cta}
-            <ArrowRight size={15} aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none" />
-          </Link>
-        </div>
+      <div className="mt-auto pt-2">
+        <WhatsAppCta
+          label={copy.cta}
+          message={copy.message}
+          ariaLabel={`${copy.name}: ${copy.cta}`}
+          variant={featured ? "gold" : "secondary"}
+          size="md"
+          className={`${styles.animatedBorder} h-11 w-full whitespace-nowrap`}
+        />
       </div>
-    </Card>
+    </div>
   );
 }
 
-// Três entradas comerciais (Landing pages, Sites empresariais, Sistemas web
-// e automações). Cada cartão: imagem do catálogo (captura real, rotulada),
-// selo de disponibilidade, benefício, recursos — os sob medida marcados — e
-// o CTA específico para o configurador. Entram em sequência ao rolar.
+// Vitrine de três ofertas: Sistemas sob medida, Site por Assinatura (em
+// destaque) e Automações com IA. Fitas verdes em movimento e molduras animadas
+// seguem a identidade da prévia Black Friday. Cada botão abre o WhatsApp com a
+// mensagem da própria oferta.
 export function EntriesSection() {
   const e = useTranslations().commercial.home.entries;
 
@@ -91,10 +66,14 @@ export function EntriesSection() {
     <Section id="entradas">
       <Container>
         <SectionHeader eyebrow={e.eyebrow} title={e.title} description={e.description} />
-        <RevealStagger as="ul" className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {HOME_ENTRIES.map((entry) => (
-            <RevealItem as="li" key={entry.id} className="md:last:col-span-2 lg:last:col-span-1">
-              <EntryCard entry={entry} />
+        <div className={`${styles.ribbonArea} overflow-x-clip`} aria-hidden="true">
+          <RibbonBand text="Sites • Sistemas • Automações com IA" tone="green" direction="left" angle="-6deg" />
+          <RibbonBand text="Sistemas sob medida • Site por assinatura" tone="dark" direction="right" angle="6deg" />
+        </div>
+        <RevealStagger as="ul" className="grid gap-5 lg:grid-cols-3 lg:items-stretch">
+          {READING_ORDER.map((id) => (
+            <RevealItem as="li" key={id} className={DESKTOP_ORDER[id]}>
+              <OfferCard id={id} />
             </RevealItem>
           ))}
         </RevealStagger>
