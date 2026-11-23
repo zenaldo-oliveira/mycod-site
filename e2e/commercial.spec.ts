@@ -587,14 +587,12 @@ test("configurador: serviço e segmento de serviços locais pela URL", async ({ 
   finish(check);
 });
 
-test("percurso: entrada da Home → serviço selecionado → resumo → contato", async ({ browser }) => {
+test("percurso: configurador com serviço selecionado → resumo → contato", async ({ browser }) => {
   const check = createCheck();
   const { context, page, errors } = await newPage(browser, 1440, { height: 900 });
-  await page.goto(BASE + "/", { waitUntil: "networkidle" });
-  await skipIntro(page);
-  await page.evaluate(() => document.getElementById("entradas")!.scrollIntoView());
-  await page.locator('#entradas a[href="/build?service=landing"]').click();
-  await page.waitForURL(BASE + "/build?service=landing");
+  // A home não leva mais à landing: as ofertas da vitrine abrem o WhatsApp.
+  // Este percurso começa no configurador, com a solução de sites.
+  await page.goto(BASE + "/build?service=landing", { waitUntil: "networkidle" });
   await page.waitForTimeout(400);
   check("serviço selecionado: solução de sites marcada", await page.isChecked("#builder-solution-sites"));
   await next(page);

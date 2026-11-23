@@ -9,17 +9,14 @@ import { Section, SectionHeader } from "@/components/ui/Section";
 import type { HomeEntryId } from "@/lib/catalog/home";
 import { useTranslations } from "@/lib/i18n/LanguageContext";
 
-// Ordem de leitura e de teclado: o plano por assinatura vem primeiro, e assim
-// aparece no celular. No desktop, a classe `order` coloca sistemas à esquerda,
-// o plano no centro e automações à direita.
-const READING_ORDER: HomeEntryId[] = ["site", "systems", "automation"];
+// Duas listas com a mesma informação, uma por largura. Cada uma tem a ordem
+// de leitura e de Tab da sua tela: no celular, o plano por assinatura primeiro;
+// no desktop, sistemas à esquerda, o plano no centro e automações à direita.
+// A lista que não aparece fica com display:none, então sai da árvore de
+// acessibilidade e da ordem de Tab, sem tabindex positivo.
+const MOBILE_ORDER: HomeEntryId[] = ["site", "systems", "automation"];
+const DESKTOP_ORDER: HomeEntryId[] = ["systems", "site", "automation"];
 const FEATURED: HomeEntryId = "site";
-
-const DESKTOP_ORDER: Record<HomeEntryId, string> = {
-  site: "order-1 lg:order-2",
-  systems: "order-2 lg:order-1",
-  automation: "order-3 lg:order-3",
-};
 
 function OfferCard({ id }: { id: HomeEntryId }) {
   const copy = useTranslations().commercial.home.entries.items[id];
@@ -55,6 +52,18 @@ function OfferCard({ id }: { id: HomeEntryId }) {
   );
 }
 
+function OfferList({ order, className }: { order: HomeEntryId[]; className: string }) {
+  return (
+    <RevealStagger as="ul" className={className}>
+      {order.map((id) => (
+        <RevealItem as="li" key={id} className="flex">
+          <OfferCard id={id} />
+        </RevealItem>
+      ))}
+    </RevealStagger>
+  );
+}
+
 // Vitrine de três ofertas: Sistemas sob medida, Site por Assinatura (em
 // destaque) e Automações com IA. Fitas verdes em movimento e molduras animadas
 // seguem a identidade da prévia Black Friday. Cada botão abre o WhatsApp com a
@@ -70,13 +79,14 @@ export function EntriesSection() {
           <RibbonBand text="Sites • Sistemas • Automações com IA" tone="green" direction="left" angle="-6deg" />
           <RibbonBand text="Sistemas sob medida • Site por assinatura" tone="dark" direction="right" angle="6deg" />
         </div>
-        <RevealStagger as="ul" className="grid gap-5 lg:grid-cols-3 lg:items-stretch">
-          {READING_ORDER.map((id) => (
-            <RevealItem as="li" key={id} className={DESKTOP_ORDER[id]}>
-              <OfferCard id={id} />
-            </RevealItem>
-          ))}
-        </RevealStagger>
+        <OfferList
+          order={MOBILE_ORDER}
+          className="grid gap-5 lg:hidden"
+        />
+        <OfferList
+          order={DESKTOP_ORDER}
+          className="hidden gap-5 lg:grid lg:grid-cols-3"
+        />
       </Container>
     </Section>
   );

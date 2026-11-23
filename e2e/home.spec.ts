@@ -125,17 +125,31 @@ test("Home: vitrine de três ofertas, projetos, processo, dúvidas e orçamento"
   const { context, page, errors } = await openHome(browser, 1440);
   await scrollThrough(page, 500, 60);
 
-  // Vitrine de três ofertas: o plano por assinatura vem primeiro na leitura,
-  // com a condição de valor anual e um CTA de WhatsApp com mensagem própria.
-  const cards = await page.evaluate(() =>
-    [...document.querySelectorAll("#entradas ul > li")].map((li) => ({
-      text: li.textContent ?? "",
-      hasCondition: li.textContent?.includes("Consultar valor anual") ?? false,
-      hasWhatsAppCta: [...li.querySelectorAll("a[href]")].some((a) => a.getAttribute("href")?.startsWith("https://wa.me")),
-    })),
+  // Vitrine: a lista visível muda com a largura. Desktop: sistemas, plano
+  // (centro) e automações. Celular: plano primeiro. Só a lista visível entra no Tab.
+  const readCards = () => page.evaluate(() =>
+    [...document.querySelectorAll("#entradas ul")]
+      .filter((ul) => ul.getBoundingClientRect().height > 0)
+      .flatMap((ul) => [...ul.querySelectorAll(":scope > li")])
+      .map((li) => ({
+        title: li.querySelector("h3")?.textContent ?? "",
+        hasCondition: li.textContent?.includes("Consultar valor anual") ?? false,
+        hasWhatsAppCta: [...li.querySelectorAll("a[href]")].some((a) => a.getAttribute("href")?.startsWith("https://wa.me")),
+      })),
   );
-  check("serviços: 3 ofertas, plano por assinatura primeiro, cada uma com WhatsApp", cards.length === 3 && cards[0].text.includes("Site por Assinatura") && cards[0].hasCondition && cards.every((c) => c.hasWhatsAppCta), cards);
-
+  const desktopCards = await readCards();
+  check("vitrine 1440: Sistemas, Site por Assinatura e Automações nesta ordem", desktopCards.map((c) => c.title).join("|") === "Sistemas Web sob Medida|Site por Assinatura|Automações com IA" && desktopCards.every((c) => c.hasWhatsAppCta), desktopCards);
+  check("vitrine 1440: condição anual visível no plano", desktopCards[1]?.hasCondition === true, desktopCards[1]);
+  const mobile = await openHome(browser, 390);
+  await scrollThrough(mobile.page, 500, 60);
+  const mobileCards = await mobile.page.evaluate(() =>
+    [...document.querySelectorAll("#entradas ul")]
+      .filter((ul) => ul.getBoundingClientRect().height > 0)
+      .flatMap((ul) => [...ul.querySelectorAll(":scope > li h3")].map((h) => h.textContent ?? "")),
+  );
+  check("vitrine 390: Site por Assinatura primeiro, depois Sistemas e Automações", mobileCards.join("|") === "Site por Assinatura|Sistemas Web sob Medida|Automações com IA", mobileCards);
+  await mobile.context.close();
+  
   const previewCount = await page.evaluate(() => document.querySelectorAll('#exemplos [role="tab"]').length);
   check("projetos: abas de exemplos", previewCount === HOME_PREVIEWS.length, previewCount);
 
@@ -237,5 +251,29 @@ test("Home: idiomas EN e ES", async ({ browser }) => {
   await page.evaluate(() => localStorage.setItem("language", "pt"));
   check("idiomas: sem erros de console", errors.length === 0, errors.slice(0, 2));
   await context.close();
+  finish(check);
+});
+
+test("Home: fitas e bordas animadas, desligadas com movimento reduzido, texto legível", async ({ browser }) => {
+  const check = createCheck();
+  const probe = () => ({
+    trackAnimation: getComputedStyle(document.querySelector("#entradas [class*=trackLeft]") as Element).animationName,
+    cardFrame: getComputedStyle(document.querySelector("#entradas [class*=card]") as Element, "::after").animationName,
+    buttonBorder: getComputedStyle(document.querySelector("#entradas [class*=animatedBorder]") as Element, "::before").animationName,
+    titleOpacity: getComputedStyle(document.querySelector("#entradas h3") as Element).opacity,
+  });
+
+  const moving = await openHome(browser, 1440);
+  await scrollThrough(moving.page, 500, 60);
+  const motion = await moving.page.evaluate(probe);
+  check("com movimento: fitas, moldura e borda animadas", motion.trackAnimation !== "none" && motion.cardFrame !== "none" && motion.buttonBorder !== "none", motion);
+  await moving.context.close();
+
+  const still = await openHome(browser, 1440, { reducedMotion: "reduce" });
+  await scrollThrough(still.page, 500, 60);
+  const quiet = await still.page.evaluate(probe);
+  check("movimento reduzido: fitas, moldura e borda estáticas", quiet.trackAnimation === "none" && quiet.cardFrame === "none" && quiet.buttonBorder === "none", quiet);
+  check("movimento reduzido: título da vitrine legível (opacidade 1)", quiet.titleOpacity === "1", quiet);
+  await still.context.close();
   finish(check);
 });
