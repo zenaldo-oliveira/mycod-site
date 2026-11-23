@@ -1,0 +1,512 @@
+/* Ângulo animável: permite girar o gradiente cônico das molduras e botões.
+   Navegadores sem suporte mostram a borda estática, sem quebrar o layout. */
+@property --bf-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Estilos isolados da prévia Black Friday. Nada aqui é global: o CSS Module
+   garante que as classes não vazem para a home nem para as demais páginas. */
+
+.page {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #09060f;
+  color: #f5f1fa;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Faixa superior preta e dourada. */
+.strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(90deg, #0a0a0a, #1d1505 40%, #1d1505 60%, #0a0a0a);
+  border-bottom: 1px solid rgba(240, 199, 94, 0.35);
+}
+
+.stripText {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #b8862b, #f0c75e 45%, #fff3c4 50%, #f0c75e 55%, #b8862b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hero: fundo radial roxo, partículas discretas e fitas cruzadas. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 3.5rem 1.25rem 0;
+  text-align: center;
+  background: radial-gradient(
+    ellipse 80% 70% at 50% 30%,
+    #4a2a7a 0%,
+    #2a1550 35%,
+    #0f0a1c 75%,
+    #09060f 100%
+  );
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: #f0c75e;
+  box-shadow: 0 0 6px rgba(240, 199, 94, 0.7);
+  opacity: 0.2;
+  animation: twinkle var(--dur) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.brandMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: #53377e;
+  color: #ffffff;
+}
+
+.title {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 10vw, 6rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.titleGold {
+  display: block;
+  font-size: 0.42em;
+  letter-spacing: 0.22em;
+  background: linear-gradient(90deg, #b8862b, #f0c75e 45%, #fff3c4 50%, #f0c75e 55%, #b8862b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.titleMain {
+  display: block;
+  color: #ffffff;
+  text-shadow: 0 0 32px rgba(216, 208, 232, 0.35);
+}
+
+.lead {
+  margin: 0;
+  max-width: 34rem;
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+  line-height: 1.5;
+  color: #d8d0e8;
+}
+
+/* Botões demonstrativos: visuais, sem ação. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 1.5rem;
+  border-radius: 9999px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: default;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.buttonPrimary {
+  border: 0;
+  color: #0a0a0a;
+  background: linear-gradient(90deg, #b8862b, #f0c75e 50%, #b8862b);
+  box-shadow: 0 10px 30px -10px rgba(240, 199, 94, 0.6);
+}
+
+.buttonGhost {
+  border: 1px solid rgba(216, 208, 232, 0.35);
+  color: #f5f1fa;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.animatedBorder {
+  position: relative;
+  isolation: isolate;
+  border: 0;
+}
+
+.animatedBorder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--bf-angle),
+    #f0c75e,
+    #d8d0e8,
+    #b8862b,
+    #f0c75e
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: bfFrameSpin 3s linear infinite;
+  pointer-events: none;
+}
+
+.animatedBorder:hover::before {
+  animation-duration: 1.4s;
+}
+
+@keyframes bfFrameSpin {
+  to {
+    --bf-angle: 360deg;
+  }
+}
+
+.button:focus-visible {
+  outline: 2px solid #f0c75e;
+  outline-offset: 3px;
+}
+
+/* Fitas cruzadas em X sobre a parte inferior do hero. */
+.ribbonArea {
+  position: relative;
+  height: clamp(9rem, 26vw, 16rem);
+  margin: 2.5rem -1rem 0;
+}
+
+.ribbon {
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  width: 140%;
+  height: clamp(2.5rem, 6vw, 4rem);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  transform: translateY(-50%) rotate(var(--angle));
+  box-shadow: 0 14px 40px -12px rgba(0, 0, 0, 0.7);
+}
+
+.ribbonGreen {
+  color: #04100a;
+  background: linear-gradient(90deg, #5fbf1f, #90e838 50%, #5fbf1f);
+  animation: ribbonGlow 2.4s ease-in-out infinite;
+}
+
+.ribbonDark {
+  color: #90e838;
+  background: #04100a;
+  border-top: 1px solid rgba(144, 232, 56, 0.7);
+  border-bottom: 1px solid rgba(144, 232, 56, 0.7);
+  animation: ribbonGlow 2.4s ease-in-out infinite reverse;
+}
+
+/* Brilho pulsante: chama atenção sem mudar a posição da faixa. */
+@keyframes ribbonGlow {
+  0%,
+  100% {
+    box-shadow: 0 14px 40px -12px rgba(0, 0, 0, 0.7), 0 0 0 rgba(144, 232, 56, 0);
+  }
+  50% {
+    box-shadow: 0 14px 40px -12px rgba(0, 0, 0, 0.7), 0 0 28px rgba(144, 232, 56, 0.55);
+  }
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.trackLeft {
+  animation: marqueeLeft 26s linear infinite;
+}
+
+.trackRight {
+  animation: marqueeRight 32s linear infinite;
+}
+
+.segment {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.item {
+  padding: 0 1.1rem;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@keyframes marqueeLeft {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marqueeRight {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Seção de serviços. */
+.services {
+  padding: 4rem 1.25rem 3rem;
+  max-width: 76rem;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  margin: 0 0 2rem;
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, translate 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.6rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(216, 208, 232, 0.14);
+  background: linear-gradient(180deg, rgba(42, 21, 80, 0.55), rgba(10, 6, 20, 0.92));
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at 50% 0%, rgba(240, 199, 94, 0.18), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: rgba(240, 199, 94, 0.6);
+  box-shadow: 0 0 0 1px rgba(240, 199, 94, 0.25), 0 20px 60px -20px rgba(240, 199, 94, 0.35);
+  translate: 0 -4px;
+}
+
+/* Moldura animada: anel cônico que gira ao redor do card. */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--bf-angle),
+    transparent 0deg,
+    #f0c75e 55deg,
+    #d8d0e8 110deg,
+    transparent 170deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+  animation: bfFrameSpin 6s linear infinite;
+  pointer-events: none;
+}
+
+.card:hover::after,
+.card:focus-within::after {
+  opacity: 1;
+}
+
+.cardFeatured::after {
+  opacity: 0.85;
+}
+
+.card:hover::before,
+.card:focus-within::before {
+  opacity: 1;
+}
+
+.cardFeatured {
+  border-color: rgba(240, 199, 94, 0.7);
+  background: linear-gradient(180deg, rgba(90, 50, 150, 0.6), rgba(12, 7, 24, 0.95));
+}
+
+.badge {
+  align-self: flex-start;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  background: linear-gradient(90deg, #b8862b, #f0c75e);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.cardText {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: #d8d0e8;
+}
+
+.value {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.9rem;
+  border: 1px dashed rgba(240, 199, 94, 0.4);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.valueLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f0c75e;
+}
+
+.valueText {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cardButton {
+  margin-top: auto;
+  width: 100%;
+  color: #f5f1fa;
+  border: 1px solid rgba(216, 208, 232, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.cardButton:hover {
+  border-color: rgba(240, 199, 94, 0.6);
+}
+
+/* Marquee dourada entre seções. */
+.goldMarquee {
+  overflow: hidden;
+  padding: 1rem 0;
+  background: linear-gradient(90deg, #5fbf1f, #90e838 50%, #5fbf1f);
+  color: #04100a;
+}
+
+.footer {
+  padding: 2rem 1.25rem 2.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #a79fb8;
+}
+
+.footer p {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle,
+  .trackLeft,
+  .trackRight {
+    animation: none;
+  }
+
+  .card,
+  .card::before,
+  .button {
+    transition: none;
+  }
+
+  .card::after,
+  .animatedBorder::before,
+  .ribbonGreen,
+  .ribbonDark {
+    animation: none;
+  }
+}
