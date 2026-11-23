@@ -1,0 +1,83 @@
+/* Estilos próprios das prévias de serviços e promoções. Os blocos de página,
+   cabeçalho e cards vêm do módulo da Black Friday (isolado da home). */
+
+.intro {
+  max-width: 48rem;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.lead {
+  margin: 0;
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  line-height: 1.55;
+  color: #d8d0e8;
+}
+
+.emptyCard {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px dashed rgba(240, 199, 94, 0.45);
+  background: rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.emptyText {
+  margin: 0;
+  color: #d8d0e8;
+  line-height: 1.5;
+}
+
+.placeholderGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 900px) {
+  .placeholderGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.placeholder {
+  opacity: 0.85;
+}
+
+.navLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navLinks a {
+  color: #f0c75e;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.navLinks a:focus-visible {
+  outline: 2px solid #f0c75e;
+  outline-offset: 3px;
+}
