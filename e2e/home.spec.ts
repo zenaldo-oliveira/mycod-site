@@ -9,7 +9,7 @@ import { BASE, WA_EXISTING_SITE, WA_OFFICIAL, createCheck, finish, headingText, 
 // Sistemas, IA) com dados fictícios. O CTA principal do Hero leva ao bloco de
 // orçamento, sem depender do número de WhatsApp ainda pendente.
 
-const SECTION_ORDER = ["inicio", "entradas", "exemplos", "processo", "duvidas", "contato"];
+const SECTION_ORDER = ["promocao", "inicio", "entradas", "exemplos", "processo", "duvidas", "contato"];
 const HERO_TITLE = "Sites, sistemas e automações para empresas de serviços";
 const DEMO_SITUATIONS = [
   "Um cliente pede orçamento pelo site",

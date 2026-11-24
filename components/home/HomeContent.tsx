@@ -1,5 +1,6 @@
 "use client";
 
+import { BlackFridayHero } from "@/components/black-friday/BlackFridayHero";
 import { EntriesSection } from "@/components/home/sections/EntriesSection";
 import { MycodIntro } from "@/components/home/MycodIntro";
 import { HeroSection } from "@/components/home/sections/HeroSection";
@@ -19,6 +20,7 @@ export function HomeContent() {
   return (
     <>
       <MycodIntro />
+      <BlackFridayHero />
       <HeroSection />
       <EntriesSection />
       <PreviewsSection />
