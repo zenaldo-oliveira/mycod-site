@@ -1,0 +1,105 @@
+/* Conversa simulada no WhatsApp: dados fictícios, rotulada no componente. */
+.phone {
+  perspective: 900px;
+  border-radius: 18px;
+  background: #0c0817;
+  border: 1px solid rgba(185, 163, 240, 0.2);
+  padding: 12px;
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.45);
+  transition: transform 0.35s ease-out;
+  transform-style: preserve-3d;
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #261a45;
+  border-radius: 12px 12px 0 0;
+  padding: 10px 12px;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #f5f3fa;
+}
+.head small {
+  display: block;
+  color: #cfc5e3;
+  font-size: 11px;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #b9a3f0;
+  color: #120c1f;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 11px;
+  flex: none;
+}
+.chat {
+  background: #1b1330;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  min-height: 220px;
+  transform: translateZ(22px);
+  color: #f5f3fa;
+}
+.day {
+  align-self: center;
+  font-size: 11px;
+  color: #cfc5e3;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.bubble {
+  max-width: 82%;
+  padding: 8px 11px;
+  border-radius: 12px;
+  line-height: 1.35;
+}
+.me {
+  align-self: flex-end;
+  background: #53377e;
+  border-bottom-right-radius: 4px;
+}
+.bot {
+  align-self: flex-start;
+  background: rgba(185, 163, 240, 0.14);
+  border-bottom-left-radius: 4px;
+}
+.time {
+  display: block;
+  font-size: 10px;
+  opacity: 0.7;
+  text-align: right;
+  margin-top: 3px;
+}
+.bot .time { text-align: left; }
+.slots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.slot {
+  font-size: 12px;
+  font-weight: 700;
+  color: #120c1f;
+  background: #b9a3f0;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+.note {
+  font-size: 12px;
+  color: #cfc5e3;
+  margin: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .phone { transition: none; }
+}

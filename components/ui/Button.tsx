@@ -30,7 +30,7 @@ const VARIANTS: Record<ButtonVariant, string> = {
   onBrand:
     "border border-white/45 bg-white/10 text-white hover:border-white hover:bg-white/20",
   link: "rounded-md text-accent hover:text-text-primary",
-  gold: "bg-[#e7b84b] text-[#1b1330] hover:bg-[#f0c75e]",
+  gold: "bg-[#b9a3f0] text-[#120c1f] hover:bg-[#cdbcf7]",
 };
 
 const SIZES: Record<ButtonSize, string> = {

@@ -1,6 +1,7 @@
 "use client";
 
 import { WhatsAppCta } from "@/components/contact/WhatsAppCta";
+import { AutomationChat } from "@/components/home/sections/AutomationChat";
 import { RibbonBand } from "@/components/black-friday/RibbonBand";
 import styles from "@/components/black-friday/black-friday.module.css";
 import { Container } from "@/components/ui/Container";
@@ -32,8 +33,10 @@ function OfferCard({ id }: { id: HomeEntryId }) {
 
       <p className="text-pretty text-sm leading-relaxed text-text-secondary">{copy.benefit}</p>
 
+      {id === "automation" && <AutomationChat />}
+
       {copy.condition && (
-        <p className="rounded-lg border border-[#f0c75e]/60 px-3 py-2 text-sm font-medium text-[#f0c75e]">
+        <p className="rounded-lg border border-[#b9a3f0]/60 px-3 py-2 text-sm font-medium text-[#b9a3f0]">
           {copy.condition}
         </p>
       )}
@@ -81,11 +84,11 @@ export function EntriesSection() {
         </div>
         <OfferList
           order={MOBILE_ORDER}
-          className="grid gap-5 lg:hidden"
+          className="relative z-10 grid gap-5 lg:hidden"
         />
         <OfferList
           order={DESKTOP_ORDER}
-          className="hidden gap-5 lg:grid lg:grid-cols-3"
+          className="relative z-10 hidden gap-5 lg:grid lg:grid-cols-3"
         />
       </Container>
     </Section>
