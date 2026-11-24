@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import styles from "./FloatingWhatsapp.module.css";
 import { buildWhatsAppUrl } from "@/lib/contact/whatsapp";
 import { useTranslations } from "@/lib/i18n/LanguageContext";
 
@@ -13,7 +14,7 @@ const HERO_SECTION_ID = "inicio";
 const MOBILE_QUERY = "(max-width: 767px)";
 
 const BASE_CLASSES =
-  "fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-background shadow-lg transition-[transform,opacity] duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none";
+  "fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white transition-[transform,opacity] duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none";
 
 // Atalho fixo para o WhatsApp (número e mensagem vêm de lib/contact/whatsapp).
 // z-30: abaixo do overlay do drawer mobile (z-40) — com o menu aberto, o botão
@@ -59,9 +60,9 @@ export function FloatingWhatsapp() {
       aria-label={t.cta.whatsappAriaLabel}
       aria-hidden={hidden || undefined}
       inert={hidden}
-      className={`${BASE_CLASSES} ${hidden ? "pointer-events-none opacity-0" : "opacity-100"}`}
+      className={`${BASE_CLASSES} ${styles.pulse} ${hidden ? "pointer-events-none opacity-0" : "opacity-100"}`}
     >
-      <MessageCircle size={26} strokeWidth={2.5} aria-hidden="true" />
+      <FaWhatsapp size={30} aria-hidden="true" />
     </a>
   );
 }

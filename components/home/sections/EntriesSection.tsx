@@ -84,11 +84,11 @@ export function EntriesSection() {
         </div>
         <OfferList
           order={MOBILE_ORDER}
-          className="relative z-10 grid gap-5 lg:hidden"
+          className="relative z-10 mx-auto grid max-w-3xl gap-5 sm:grid-cols-2 lg:hidden"
         />
         <OfferList
           order={DESKTOP_ORDER}
-          className="relative z-10 hidden gap-5 lg:grid lg:grid-cols-3"
+          className="relative z-10 mx-auto hidden max-w-5xl gap-5 lg:grid lg:grid-cols-3"
         />
       </Container>
     </Section>
